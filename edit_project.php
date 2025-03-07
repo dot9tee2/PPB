@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: admin.php"); // Redirect to admin login (adjust if renamed)
+    exit;
+}
+
 include 'db_connect.php';
 
 $project_id = (int)$_GET['id'];
@@ -40,7 +48,6 @@ if (isset($_POST['edit_project'])) {
     $stmt->bind_param("ssssssssssi", $title, $details, $city, $location, $description, $amenities, $video_url, $map_url, $developers, $testimonials, $project_id);
     $stmt->execute();
 
-    // Handle new images
     if (!empty($_FILES['images']['name'][0])) {
         foreach ($_FILES['images']['name'] as $key => $name) {
             $tmp_name = $_FILES['images']['tmp_name'][$key];
@@ -53,9 +60,8 @@ if (isset($_POST['edit_project'])) {
         }
     }
 
-    // Handle pricing updates
     if (!empty($_POST['plot_size'])) {
-        $conn->query("DELETE FROM project_pricing WHERE project_id = $project_id"); // Reset pricing
+        $conn->query("DELETE FROM project_pricing WHERE project_id = $project_id");
         foreach ($_POST['plot_size'] as $index => $plot_size) {
             if (!empty($plot_size)) {
                 $price = $_POST['price'][$index];
@@ -68,7 +74,7 @@ if (isset($_POST['edit_project'])) {
         }
     }
 
-    header("Location: admin.php");
+    header("Location: admin.php"); // Adjust if renamed
     exit;
 }
 ?>
@@ -142,12 +148,18 @@ if (isset($_POST['edit_project'])) {
             color: #333;
             margin-bottom: var(--spacing-md);
         }
+
+        .logout-btn {
+            float: right;
+            margin: var(--spacing-md);
+        }
     </style>
 </head>
 
 <body>
     <?php include 'navbar.php'; ?>
     <div class="admin-container">
+        <a href="admin.php?logout" class="btn logout-btn">Logout</a>
         <div class="form-section">
             <h2>Edit Project: <?php echo htmlspecialchars($project['title']); ?></h2>
             <form method="POST" enctype="multipart/form-data">

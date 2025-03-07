@@ -1,4 +1,88 @@
 <?php
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+  // If not logged in, show login form
+  if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    // Hardcoded credentials (replace with your own)
+    $valid_username = 'Waqas';
+    $valid_password = 'Waqas@0726'; // Change this to a strong password
+
+    if ($username === $valid_username && $password === $valid_password) {
+      $_SESSION['logged_in'] = true;
+    } else {
+      $error = "Invalid username or password!";
+    }
+  }
+
+  if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+?>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Admin Login</title>
+      <link rel="stylesheet" href="css/base.css">
+      <style>
+        .login-container {
+          max-width: 400px;
+          margin: 100px auto;
+          padding: var(--spacing-lg);
+          background: #fff;
+          border-radius: 5px;
+          box-shadow: var(--shadow);
+        }
+
+        .login-container h2 {
+          margin-bottom: var(--spacing-md);
+        }
+
+        .login-container label {
+          display: block;
+          margin: var(--spacing-sm) 0 5px;
+          font-weight: 600;
+        }
+
+        .login-container input {
+          width: 100%;
+          padding: 8px;
+          margin-bottom: var(--spacing-md);
+          border: 1px solid var(--light-gray);
+          border-radius: 5px;
+        }
+
+        .error {
+          color: #d9534f;
+          margin-bottom: var(--spacing-md);
+        }
+      </style>
+    </head>
+
+    <body>
+      <div class="login-container">
+        <h2>Admin Login</h2>
+        <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
+        <form method="POST">
+          <label>Username:</label>
+          <input type="text" name="username" required>
+          <label>Password:</label>
+          <input type="password" name="password" required>
+          <input type="submit" name="login" value="Login" class="btn">
+        </form>
+      </div>
+    </body>
+
+    </html>
+<?php
+    exit;
+  }
+}
+
 include 'db_connect.php';
 
 // Handle adding a new project
@@ -14,7 +98,6 @@ if (isset($_POST['add_project'])) {
   $developers = !empty($_POST['developers']) ? $_POST['developers'] : null;
   $testimonials = !empty($_POST['testimonials']) ? json_encode(explode("\n", trim($_POST['testimonials']))) : null;
 
-  // Insert into projects table
   $sql = "INSERT INTO projects (title, details, city, location, description, amenities, video_url, map_url, developers, testimonials) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   $stmt = $conn->prepare($sql);
@@ -22,7 +105,6 @@ if (isset($_POST['add_project'])) {
   $stmt->execute();
   $project_id = $conn->insert_id;
 
-  // Handle image uploads
   if (!empty($_FILES['images']['name'][0])) {
     foreach ($_FILES['images']['name'] as $key => $name) {
       $tmp_name = $_FILES['images']['tmp_name'][$key];
@@ -35,7 +117,6 @@ if (isset($_POST['add_project'])) {
     }
   }
 
-  // Handle pricing
   if (!empty($_POST['plot_size'])) {
     foreach ($_POST['plot_size'] as $index => $plot_size) {
       if (!empty($plot_size)) {
@@ -48,13 +129,20 @@ if (isset($_POST['add_project'])) {
       }
     }
   }
-  header("Location: admin.php");
+  header("Location: " . basename(__FILE__));
   exit;
 }
 
 // Fetch all projects
 $sql = "SELECT * FROM projects";
 $result = $conn->query($sql);
+
+// Handle logout
+if (isset($_GET['logout'])) {
+  session_destroy();
+  header("Location: " . basename(__FILE__));
+  exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -151,12 +239,18 @@ $result = $conn->query($sql);
       color: #333;
       margin-bottom: var(--spacing-md);
     }
+
+    .logout-btn {
+      float: right;
+      margin: var(--spacing-md);
+    }
   </style>
 </head>
 
 <body>
   <?php include 'navbar.php'; ?>
   <div class="admin-container">
+    <a href="?logout" class="btn logout-btn">Logout</a>
     <!-- Add Project Form -->
     <div class="form-section">
       <h2>Add New Project</h2>
@@ -247,7 +341,7 @@ $result = $conn->query($sql);
             <td><?php echo htmlspecialchars($project['city']); ?></td>
             <td>
               <a href="edit_project.php?id=<?php echo $project['id']; ?>" class="btn">Edit</a>
-              <a href="admin.php?delete=<?php echo $project['id']; ?>" class="btn btn-delete" onclick="return confirm('Are you sure?');">Delete</a>
+              <a href="<?php echo basename(__FILE__); ?>?delete=<?php echo $project['id']; ?>" class="btn btn-delete" onclick="return confirm('Are you sure?');">Delete</a>
             </td>
           </tr>
         <?php endwhile; ?>
@@ -287,7 +381,7 @@ if (isset($_GET['delete'])) {
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("i", $id);
   $stmt->execute();
-  header("Location: admin.php");
+  header("Location: " . basename(__FILE__));
   exit;
 }
 ?>
