@@ -1,0 +1,238 @@
+/* navbar.css */
+.navbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  background: var(--dark-green);
+  padding: 0 var(--spacing-md);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+}
+
+.brand-container a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo img {
+  padding: 5px;
+  height: 90px;
+  width: auto;
+}
+.company-name {
+  padding: 5px;
+}
+
+.company-name h2 {
+  font-family: var(--font-primary);
+  color: var(--white);
+  letter-spacing: 9px;
+  font-size: 20px;
+  margin: 0;
+}
+
+.company-name p {
+  font-family: var(--font-primary);
+  color: var(--white);
+  font-size: 15px;
+  margin: 0;
+}
+#pk {
+  position: relative;
+  top: 2px;
+}
+#pAndB {
+  position: relative;
+  bottom: 7px;
+}
+#sologan {
+  position: relative;
+  bottom: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  background-color: black;
+  border: 2px solid black;
+}
+
+.nav-links ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links ul li {
+  margin: 0 var(--spacing-md);
+}
+
+.nav-links ul li a {
+  font-family: var(--font-secondary);
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--white);
+  padding: var(--spacing-sm);
+  position: relative;
+  transition: all 0.25s ease-in-out;
+}
+
+.nav-links ul li a::before,
+.nav-links ul li a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--light-gray);
+  transition: width 0.25s ease-in-out, left 0.25s ease-in-out;
+}
+
+.nav-links ul li a::before {
+  top: 0;
+}
+
+.nav-links ul li a::after {
+  bottom: 0;
+}
+
+.nav-links ul li a:hover::before,
+.nav-links ul li a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.nav-links ul li a:focus {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+.navbar .sidebarOpen {
+  color: var(--white);
+  font-size: 25px;
+  padding: 5px;
+  cursor: pointer;
+  display: none;
+}
+
+.nav-links .logo-toggle {
+  display: none;
+}
+.social-icons {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.social-icons a {
+  color: var(--white);
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #cccccc;
+}
+
+.social-icons a:focus {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+@media (max-width: 940px) {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+  }
+
+  .navbar .sidebarOpen {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    height: 100%;
+    width: min(80vw, 320px);
+    left: -100%;
+    top: 0;
+    background: var(--dark-green);
+    padding: var(--spacing-lg);
+    z-index: 100;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+  }
+
+  nav.active .nav-links {
+    left: 0;
+  }
+
+  .nav-links .logo-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .logo-toggle .sidebarClose {
+    color: var(--white);
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .nav-links ul {
+    flex-direction: column;
+    padding-top: 60px;
+  }
+
+  .nav-links ul li a {
+    margin-top: var(--spacing-lg);
+    display: block;
+  }
+  .social-icons {
+    justify-content: center;
+  }
+
+  .social-icons .insta,
+  .mail {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .navbar {
+    padding: var(--spacing-sm);
+  }
+
+  .logo img {
+    height: 70px;
+  }
+
+  .company-name h2 {
+    font-size: 16px;
+    letter-spacing: 6px;
+  }
+
+  .company-name p {
+    font-size: 12px;
+  }
+
+  .nav-links {
+    width: 100%;
+    padding: var(--spacing-sm);
+  }
+  .social-icons a {
+    font-size: 25px;
+  }
+}

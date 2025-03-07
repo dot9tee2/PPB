@@ -1,0 +1,15 @@
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+}
+.project-card {
+  border: 1px solid var(--light-gray);
+  padding: var(--spacing-md);
+  text-align: center;
+}
+.project-card img {
+  max-width: 100%;
+  height: auto;
+}
