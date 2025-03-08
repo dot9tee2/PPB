@@ -58,11 +58,12 @@ h2 {
 
 .sticky-cta {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  font-size: 30px;
+  bottom: 90px;
+  right: 25px;
   background: var(--dark-green);
   color: var(--white);
-  padding: 10px 20px;
+  padding: 9px 18px;
   border-radius: 50px;
   box-shadow: var(--shadow);
   z-index: 1000;

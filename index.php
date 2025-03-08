@@ -22,7 +22,7 @@
       <img src="media/logoFinal.png" alt="Company Logo">
     </div>
   </div>
-  <a href="contact.php" class="sticky-cta">Contact Us Now</a>
+  <a href="tel:03216817568" target="_blank" rel="noopener noreferrer" class="sticky-cta"><i class="bx bx-phone"></i></a>
   <?php include 'navbar.php'; ?>
   <div class="land animate-on-scroll">
     <div class="land1">
@@ -177,6 +177,22 @@
     </div>
   </section>
   <?php include 'footer.php'; ?>
+
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+      Tawk_LoadStart = new Date();
+    (function() {
+      var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/67cc0ccdd508e8190fc7b10e/1ilqh416i';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
   <script type="module" src="js/main.js"></script>
 </body>
 
