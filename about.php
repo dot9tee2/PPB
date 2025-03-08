@@ -27,24 +27,94 @@
   <section class="about-us">
     <h2>About Pakistan Properties and Builders</h2>
     <p>
-      Pakistan Properties and Builders is committed to helping you find the
-      perfect property. With years of experience since 2018, we offer
-      top-notch real estate services tailored to your needs.
+      Since our inception in 2018, Pakistan Properties and Builders has been a trusted name in real estate, connecting clients with their dream properties across Pakistan. From luxurious residential homes to high-return commercial investments, our expert team delivers personalized solutions backed by in-depth market knowledge.
     </p>
     <p>
-      Our mission is to provide trust, transparency, and value in every
-      transaction, whether you're buying a home, commercial space, or
-      investing in Pakistan’s growing real estate market.
+      We pride ourselves on fostering trust and transparency in every deal. Whether you’re a local buyer or an overseas Pakistani looking to invest in your homeland, we streamline the process with integrity and excellence.
     </p>
+
+    <div class="stats">
+      <div class="stat-item">
+        <h4>500+</h4>
+        <p>Properties Sold</p>
+      </div>
+      <div class="stat-item">
+        <h4>7+</h4>
+        <p>Years in Business</p>
+      </div>
+      <div class="stat-item">
+        <h4>100%</h4>
+        <p>Client Satisfaction</p>
+      </div>
+    </div>
+
     <h3>Meet Our CEO</h3>
-    <p>
-      Waqas Ahmed Khan founded this company with a vision to simplify real
-      estate for local and overseas Pakistanis. [Add more details if
-      available.]
-    </p>
+    <div class="ceo-profile">
+      <img src="media/ceo.jpeg" alt="Waqas Ahmed Khan, CEO" class="ceo-image">
+      <p>
+        Waqas Ahmed Khan, our founder and CEO, launched Pakistan Properties and Builders in 2018 with a bold vision: to make real estate accessible and stress-free for all Pakistanis, at home and abroad. With over a decade of experience in property development, Waqas leads our team with a commitment to innovation and client satisfaction.
+      </p>
+    </div>
+
+    <!-- Team Section -->
+    <h3>Our Team</h3>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="media/team1.jpg" alt="Team Member 1" class="team-image">
+        <h4>Ali Hassan</h4>
+        <p>Senior Property Consultant</p>
+        <p>With 8 years of experience, Ali specializes in residential properties.</p>
+      </div>
+      <div class="team-member">
+        <img src="media/team2.jpg" alt="Team Member 2" class="team-image">
+        <h4>Sana Malik</h4>
+        <p>Marketing Director</p>
+        <p>Sana drives our outreach efforts with creativity and precision.</p>
+      </div>
+    </div>
+
+    <!-- Timeline Section -->
+    <h3>Our Journey</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="year">2018</span>
+        <p>Founded by Waqas Ahmed Khan with a vision for accessible real estate.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">2020</span>
+        <p>Expanded services to overseas Pakistanis.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">2023</span>
+        <p>Reached 500+ successful property transactions.</p>
+      </div>
+    </div>
+
+    <!-- Values Section -->
+    <div class="values">
+      <div class="value-item">
+        <i class="bx bx-shield"></i>
+        <h4>Trust</h4>
+        <p>Built on integrity and honesty.</p>
+      </div>
+      <div class="value-item">
+        <i class="bx bx-globe"></i>
+        <h4>Transparency</h4>
+        <p>Clear and open communication.</p>
+      </div>
+      <div class="value-item">
+        <i class="bx bx-star"></i>
+        <h4>Excellence</h4>
+        <p>Top-tier service every time.</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <!-- ... -->
+    </div>
+
     <a href="contact.php" class="btn">Get in Touch</a>
   </section>
-
 
   <?php include 'footer.php'; ?>
   <script type="module" src="js/main.js"></script>
