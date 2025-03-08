@@ -15,15 +15,29 @@
     $stmt->close();
 
     $title = $project ? $project['title'] : 'Project Not Found';
+
+    // Function to sanitize and convert YouTube URL to embed format
+    function sanitize_youtube_url($url)
+    {
+        $url = trim($url);
+        // Check if it's a YouTube watch URL or short URL
+        if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $url, $match)) {
+            $video_id = $match[1];
+        } elseif (preg_match('/youtu\.be\/([^\&\?\/]+)/', $url, $match)) {
+            $video_id = $match[1];
+        } else {
+            // Assume it's already an embed URL or invalid
+            return $url;
+        }
+        return "https://www.youtube.com/embed/" . $video_id . "?enablejsapi=1&rel=0";
+    }
     ?>
     <title><?php echo htmlspecialchars($title); ?></title>
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/details.css">
-    <link
-        href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-        rel="stylesheet" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -84,11 +98,11 @@
 
             <!-- Remaining Full-Width Sections -->
             <section class="amenities animate-on-scroll">
-                <!-- Video Tour (last section in left column) -->
+                <!-- Video Tour -->
                 <?php if ($project['video_url']): ?>
                     <section class="video-tour animate-on-scroll">
                         <h2>Virtual Tour</h2>
-                        <iframe src="<?php echo htmlspecialchars($project['video_url']); ?>" allowfullscreen></iframe>
+                        <iframe src="<?php echo htmlspecialchars(sanitize_youtube_url($project['video_url'])); ?>" allowfullscreen></iframe>
                     </section>
                 <?php endif; ?>
                 <h2>Key Amenities</h2>

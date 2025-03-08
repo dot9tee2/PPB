@@ -1,12 +1,4 @@
 <?php
-session_start();
-
-// Check if user is logged in
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: admin.php"); // Redirect to admin login (adjust if renamed)
-    exit;
-}
-
 include 'db_connect.php';
 
 $project_id = (int)$_GET['id'];
@@ -30,6 +22,22 @@ $stmt_price->bind_param("i", $project_id);
 $stmt_price->execute();
 $pricing = $stmt_price->get_result();
 
+// Function to sanitize and convert YouTube URL to embed format
+function sanitize_youtube_url($url)
+{
+    $url = trim($url);
+    // Check if it's a YouTube watch URL or short URL
+    if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $url, $match)) {
+        $video_id = $match[1];
+    } elseif (preg_match('/youtu\.be\/([^\&\?\/]+)/', $url, $match)) {
+        $video_id = $match[1];
+    } else {
+        // Assume it's already an embed URL or invalid
+        return $url;
+    }
+    return "https://www.youtube.com/embed/" . $video_id . "?enablejsapi=1&rel=0";
+}
+
 // Handle form submission
 if (isset($_POST['edit_project'])) {
     $title = $_POST['title'];
@@ -38,7 +46,7 @@ if (isset($_POST['edit_project'])) {
     $location = $_POST['location'];
     $description = $_POST['description'];
     $amenities = !empty($_POST['amenities']) ? json_encode(explode("\n", trim($_POST['amenities']))) : null;
-    $video_url = !empty($_POST['video_url']) ? $_POST['video_url'] : null;
+    $video_url = !empty($_POST['video_url']) ? sanitize_youtube_url($_POST['video_url']) : null; // Sanitize URL
     $map_url = !empty($_POST['map_url']) ? $_POST['map_url'] : null;
     $developers = !empty($_POST['developers']) ? $_POST['developers'] : null;
     $testimonials = !empty($_POST['testimonials']) ? json_encode(explode("\n", trim($_POST['testimonials']))) : null;
@@ -48,6 +56,7 @@ if (isset($_POST['edit_project'])) {
     $stmt->bind_param("ssssssssssi", $title, $details, $city, $location, $description, $amenities, $video_url, $map_url, $developers, $testimonials, $project_id);
     $stmt->execute();
 
+    // Handle new images
     if (!empty($_FILES['images']['name'][0])) {
         foreach ($_FILES['images']['name'] as $key => $name) {
             $tmp_name = $_FILES['images']['tmp_name'][$key];
@@ -60,8 +69,9 @@ if (isset($_POST['edit_project'])) {
         }
     }
 
+    // Handle pricing updates
     if (!empty($_POST['plot_size'])) {
-        $conn->query("DELETE FROM project_pricing WHERE project_id = $project_id");
+        $conn->query("DELETE FROM project_pricing WHERE project_id = $project_id"); // Reset pricing
         foreach ($_POST['plot_size'] as $index => $plot_size) {
             if (!empty($plot_size)) {
                 $price = $_POST['price'][$index];
@@ -74,7 +84,7 @@ if (isset($_POST['edit_project'])) {
         }
     }
 
-    header("Location: admin.php"); // Adjust if renamed
+    header("Location: admin.php");
     exit;
 }
 ?>
@@ -148,18 +158,12 @@ if (isset($_POST['edit_project'])) {
             color: #333;
             margin-bottom: var(--spacing-md);
         }
-
-        .logout-btn {
-            float: right;
-            margin: var(--spacing-md);
-        }
     </style>
 </head>
 
 <body>
     <?php include 'navbar.php'; ?>
     <div class="admin-container">
-        <a href="admin.php?logout" class="btn logout-btn">Logout</a>
         <div class="form-section">
             <h2>Edit Project: <?php echo htmlspecialchars($project['title']); ?></h2>
             <form method="POST" enctype="multipart/form-data">
