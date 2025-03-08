@@ -46,7 +46,7 @@
         </div>
         <div class="card-content">
           <h3>Lahore</h3>
-          <a href="properties.php?city=Lahore" class="view-details">View Details</a>
+          <a href="projects.php?city=Lahore" class="view-details">View Details</a>
         </div>
       </div>
       <div class="listing-card">
@@ -55,7 +55,7 @@
         </div>
         <div class="card-content">
           <h3>Islamabad</h3>
-          <a href="properties.php?city=Islamabad" class="view-details">View Details</a>
+          <a href="projects.php?city=Islamabad" class="view-details">View Details</a>
         </div>
       </div>
       <div class="listing-card">
@@ -64,7 +64,7 @@
         </div>
         <div class="card-content">
           <h3>Sialkot</h3>
-          <a href="properties.php?city=Sialkot" class="view-details">View Details</a>
+          <a href="projects.php?city=Sialkot" class="view-details">View Details</a>
         </div>
       </div>
     </div>
