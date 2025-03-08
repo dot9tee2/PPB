@@ -16,12 +16,12 @@
 </head>
 
 <body>
-  <!-- <div class="preloader">
+  <div class="preloader">
     <div class="loader-container">
       <div class="loader"></div>
       <img src="media/logoFinal.png" alt="Company Logo">
     </div>
-  </div> -->
+  </div>
   <a href="contact.php" class="sticky-cta">Contact Us Now</a>
   <?php include 'navbar.php'; ?>
   <div class="land animate-on-scroll">

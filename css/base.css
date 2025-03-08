@@ -89,24 +89,24 @@ h2 {
 }
 .loader-container {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .loader {
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border: 5px solid var(--light-gray);
   border-top-color: var(--dark-green);
   border-radius: 50%;
   animation: spin 2s linear infinite, glow 2s infinite alternate;
 }
 .loader-container img {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   position: relative;
   z-index: 10;
