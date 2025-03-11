@@ -1,3 +1,6 @@
+<link
+  href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+  rel="stylesheet" />
 <nav>
   <div class="navbar">
     <i class="bx bx-menu sidebarOpen"></i>
@@ -29,7 +32,7 @@
         <li><a href="about.php">About</a></li>
         <li><a href="services.php">Services</a></li>
         <li><a href="projects.php">Projects</a></li>
-        <li><a href="properties.php">Properties</a></li>
+        <li><a href="blog.php">Blogs</a></li>
         <li><a href="contact.php">Contact</a></li>
       </ul>
     </div>

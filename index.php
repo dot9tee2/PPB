@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/blog.css">
   <!-- <link rel="stylesheet" href="animation.css" /> -->
 </head>
 
@@ -19,11 +20,13 @@
   <div class="preloader">
     <div class="loader-container">
       <div class="loader"></div>
-      <img src="media/logoFinal.png" alt="Company Logo">
+      <img loading="lazy" src="media/logoFinal.png" alt="Company Logo">
     </div>
   </div>
   <a href="tel:03216817568" target="_blank" rel="noopener noreferrer" class="sticky-cta"><i class="bx bx-phone"></i></a>
   <?php include 'navbar.php'; ?>
+
+
   <div class="land animate-on-scroll">
     <div class="land1">
       <h1>Your Dream House Awaits with Us</h1>
@@ -42,7 +45,7 @@
     <div class="listings-grid">
       <div class="listing-card">
         <div class="image-container">
-          <img src="media/lahore.webp" alt="Lahore">
+          <img loading="lazy" src="media/lahore.webp" alt="Lahore">
         </div>
         <div class="card-content">
           <h3>Lahore</h3>
@@ -51,7 +54,7 @@
       </div>
       <div class="listing-card">
         <div class="image-container">
-          <img src="media/Islamabad.webp" alt="Islamabad">
+          <img loading="lazy" src="media/Islamabad.webp" alt="Islamabad">
         </div>
         <div class="card-content">
           <h3>Islamabad</h3>
@@ -60,7 +63,7 @@
       </div>
       <div class="listing-card">
         <div class="image-container">
-          <img src="media/Sialkot.webp" alt="Sialkot">
+          <img loading="lazy" src="media/Sialkot.webp" alt="Sialkot">
         </div>
         <div class="card-content">
           <h3>Sialkot</h3>
@@ -68,7 +71,6 @@
         </div>
       </div>
     </div>
-
   </section>
 
   <!-- About Us -->
@@ -164,16 +166,35 @@
   <section class="blog animate-on-scroll">
     <h2>Latest News & Tips</h2>
     <div class="blog-grid">
-      <div class="blog-card">
-        <img src="media/blog.jpg" alt="Blog 1" />
-        <h3>Top 5 Real Estate Trends in 2025</h3>
-        <a href="#" class="btn">Read More</a>
-      </div>
-      <div class="blog-card">
-        <img src="media/blog.jpg" alt="Blog 2" />
-        <h3>How to Choose the Perfect Home</h3>
-        <a href="#" class="btn">Read More</a>
-      </div>
+      <?php
+      include 'db_connect.php'; // Include database connection
+      $sql = "SELECT * FROM blog_posts ORDER BY RAND() LIMIT 2"; // Fetch 2 random blog posts
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0) {
+        while ($blog = $result->fetch_assoc()) {
+          $image = !empty($blog['featured_image']) ? htmlspecialchars($blog['featured_image']) : 'media/blog.jpg'; // Fallback image
+          echo '<div class="blog-card">';
+          echo '<img loading="lazy" src="' . $image . '" alt="' . htmlspecialchars($blog['title']) . '" />';
+          echo '<h3>' . htmlspecialchars($blog['title']) . '</h3>';
+          echo '<a href="blog.php" class="btn">Read More</a>';
+          echo '</div>';
+        }
+      } else {
+        // Fallback if no blog posts are found
+        echo '<div class="blog-card">';
+        echo '<img src="media/blog.jpg" alt="Placeholder" />';
+        echo '<h3>No Blog Posts Available</h3>';
+        echo '<a href="blog.php" class="btn">Read More</a>';
+        echo '</div>';
+        echo '<div class="blog-card">';
+        echo '<img loading="lazy" src="media/blog.jpg" alt="Placeholder" />';
+        echo '<h3>Check Back Soon!</h3>';
+        echo '<a href="blog.php" class="btn">Read More</a>';
+        echo '</div>';
+      }
+      $conn->close();
+      ?>
     </div>
   </section>
   <?php include 'footer.php'; ?>
