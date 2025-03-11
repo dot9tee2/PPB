@@ -1,6 +1,6 @@
 # Ignore database connection file
 db_connect.php
-
+.htaccess
 # Ignore the uploads folder
 uploads/
 
