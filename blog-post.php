@@ -15,6 +15,7 @@
     $stmt->close();
     ?>
     <title><?php echo htmlspecialchars($blog['title']); ?></title>
+    <link rel="icon" type="image/x-icon" href="media/favicon.ico">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/base.css">

@@ -14,6 +14,7 @@
     $result = $stmt->get_result();
     ?>
     <title><?php echo htmlspecialchars($city); ?> Projects</title>
+    <link rel="icon" type="image/x-icon" href="media/favicon.ico">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">

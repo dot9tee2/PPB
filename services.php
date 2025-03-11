@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/services.css">
-  <title>Services</title>
+  <title>Pakistan Properties and Builder - Services</title>
+  <link rel="icon" type="image/x-icon" href="media/favicon.ico">
 </head>
 
 <body>
