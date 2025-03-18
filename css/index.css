@@ -31,10 +31,15 @@ h2 {
 
 .land2 {
   height: calc(100vh - 60px);
-  background-image: url("../media/land_bg.webp");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  overflow: hidden; /* Ensures image doesn't overflow the container */
+}
+
+.land2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Maintains aspect ratio and covers the whole div */
+  object-position: center; /* Keeps the image centered */
+  display: block;
 }
 
 .land1 h1 {

@@ -81,7 +81,9 @@
       </p>
       <a href="contact.php" class="btn">Contact Us</a>
     </div>
-    <div class="land2"></div>
+    <div class="land2">
+      <img src="land_bg.webp" loading="lazy" alt="Pakistan Properties and Builders Homepage" />
+    </div>
   </div>
   <!-- Featured Listings -->
   <section class="featured-listings animate-on-scroll">

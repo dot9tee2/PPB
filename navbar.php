@@ -1,6 +1,3 @@
-<link
-  href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-  rel="stylesheet" />
 <nav>
   <div class="navbar">
     <i class="bx bx-menu sidebarOpen"></i>
@@ -19,7 +16,7 @@
     <div class="nav-links">
       <div class="logo-toggle">
         <div class="logo">
-          <img src="media/logoFinal.png" alt="Company Logo" />
+          <img src="media/logoFinal.png" alt="Pakistan Properties and Builders Logo" />
         </div>
         <div class="company-name">
           <h2>PAKISTAN</h2>
