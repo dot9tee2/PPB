@@ -15,15 +15,58 @@
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/blog.css">
   <!-- <link rel="stylesheet" href="animation.css" /> -->
+
+  <meta name="description" content="Pakistan Properties and Builders is a real estate agency that helps you find your dream home in Lahore, Islamabad
+    and Sialkot.">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Pakistan Properties and Builders",
+      "image": "https://www.pakistanpropertiesandbuilders.com/logo.png",
+      "url": "https://www.pakistanpropertiesandbuilders.com/",
+      "telephone": "+92-321-6817568",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Commercial Broadway, DHA Phase 8",
+        "addressLocality": "Lahore",
+        "postalCode": "54940",
+        "addressCountry": "PK"
+      },
+      "description": "Leading real estate and construction company in Lahore offering property deals, home construction, and consultation services.",
+      "openingHours": "Mo-Sa 09:00-18:00",
+      "priceRange": "$$"
+    }
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KT8KVRFM');
+  </script>
+  <!-- End Google Tag Manager -->
+
 </head>
 
 <body>
-  <div class="preloader">
-    <div class="loader-container">
-      <div class="loader"></div>
-      <img loading="lazy" src="media/logoFinal.png" alt="Company Logo">
-    </div>
-  </div>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KT8KVRFM"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <a href="tel:03216817568" target="_blank" rel="noopener noreferrer" class="sticky-cta"><i class="bx bx-phone"></i></a>
   <?php include 'navbar.php'; ?>
 
