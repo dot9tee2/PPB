@@ -1,39 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.pakistanpropertiesandbuilders.com/</loc>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://www.pakistanpropertiesandbuilders.com/about</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.pakistanpropertiesandbuilders.com/services</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.pakistanpropertiesandbuilders.com/contact</loc>
-    <priority>0.8</priority>
-  </url>
-    <url>
-    <loc>https://www.pakistanpropertiesandbuilders.com/projects</loc>
-    <priority>0.8</priority>
-  </url>
-    <url>
-    <loc>https://www.pakistanpropertiesandbuilders.com/city_projects.php?city=Lahore</loc>
-    <priority>0.8</priority>
-  </url>
-    <url>
-    <loc>https://www.pakistanpropertiesandbuilders.com/city_projects.php?city=Islamabad</loc>
-    <priority>0.8</priority>
-  </url>
-    <url>
-    <loc>https://www.pakistanpropertiesandbuilders.com/city_projects.php?city=Sialkot</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.pakistanpropertiesandbuilders.com/blog</loc>
-    <priority>0.8</priority>
-  </url>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/index.php</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/about.php</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/services.php</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/projects.php</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/blog.php</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/contact.php</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/projects.php?city=Lahore</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/projects.php?city=Islamabad</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/projects.php?city=Sialkot</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/blog-post.php?id=1</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/blog-post.php?id=3</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/city_projects.php?city=Lahore</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/city_projects.php?city=Islamabad</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/city_projects.php?city=Sialkot</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/blog-post.php?id=2</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/blog-post.php?id=4</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/blog.php?category=Market+Trends</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/blog.php?category=Buyers+Guide</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.pakistanpropertiesandbuilders.com/details.php?id=1</loc>
+  <lastmod>2025-03-20T02:16:10+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
 </urlset>
