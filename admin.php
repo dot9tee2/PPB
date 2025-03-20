@@ -28,6 +28,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Admin Login - PPB</title>
       <link rel="stylesheet" href="css/base.css">
+      <link rel="stylesheet" href="css/navbar.css">
+      <link rel="stylesheet" href="css/footer.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <style>
         .login-container {
           max-width: 400px;
@@ -64,6 +68,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     </head>
 
     <body>
+      <?php include 'navbar.php'; ?>
       <div class="login-container">
         <h2>Admin Login</h2>
         <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
@@ -75,6 +80,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
           <input type="submit" name="login" value="Login" class="btn">
         </form>
       </div>
+      <?php include 'footer.php'; ?>
     </body>
 
     </html>

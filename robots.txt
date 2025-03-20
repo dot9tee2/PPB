@@ -1,4 +1,7 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /db_connect.php
 
 Sitemap: https://www.pakistanpropertiesandbuilders.com/sitemap.xml

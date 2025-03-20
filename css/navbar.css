@@ -120,7 +120,7 @@
 
 .navbar .sidebarOpen {
   color: var(--white);
-  font-size: 25px;
+  font-size: 20px;
   padding: 5px;
   cursor: pointer;
   display: none;
@@ -227,10 +227,19 @@
   .company-name p {
     font-size: 12px;
   }
+  #sologan {
+    font-size: 9px;
+  }
 
   .nav-links {
     width: 100%;
     padding: var(--spacing-sm);
+  }
+  .social-icons .whatsapp {
+    display: none;
+  }
+  .navbar .social-icons {
+    gap: 2px;
   }
   .social-icons a {
     font-size: 25px;
