@@ -1,0 +1,97 @@
+/* accessibility.css - Additional styles for improved accessibility */
+
+/* Focus states */
+*:focus {
+  outline: 3px solid var(--dark-green);
+  outline-offset: 2px;
+}
+
+/* Skip to content link for keyboard users */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.skip-to-content:focus {
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  padding: 15px;
+  background: var(--dark-green);
+  color: var(--white);
+  text-align: center;
+  font-weight: bold;
+  outline: none;
+}
+
+/* Enhanced keyboard navigation */
+.btn:focus,
+.service-link:focus,
+.faq-question:focus {
+  outline: 3px solid var(--dark-green);
+  outline-offset: 2px;
+}
+
+/* High contrast mode adjustments */
+@media (forced-colors: active) {
+  .btn,
+  .service-card,
+  .feature,
+  .testimonial,
+  .faq-item {
+    border: 1px solid ButtonText;
+  }
+  
+  .btn {
+    forced-color-adjust: none;
+    background-color: ButtonFace;
+    color: ButtonText;
+  }
+  
+  .btn:hover,
+  .btn:focus {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  
+  .services-hero h1,
+  .services-hero p,
+  .services-hero .btn {
+    opacity: 1;
+  }
+  
+  .service-card:hover {
+    transform: none;
+  }
+  
+  .feature:hover {
+    transform: none;
+  }
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+} 

@@ -87,7 +87,7 @@
             Since our inception in 2018, Pakistan Properties and Builders has been a trusted name in real estate, connecting clients with their dream properties across Pakistan. From luxurious residential homes to high-return commercial investments, our expert team delivers personalized solutions backed by in-depth market knowledge.
         </p>
         <p>
-            We pride ourselves on fostering trust and transparency in every deal. Whether you’re a local buyer or an overseas Pakistani looking to invest in your homeland, we streamline the process with integrity and excellence.
+            We pride ourselves on fostering trust and transparency in every deal. Whether you're a local buyer or an overseas Pakistani looking to invest in your homeland, we streamline the process with integrity and excellence.
         </p>
         <div class="stats">
             <div class="stat-item">
@@ -159,6 +159,110 @@
         </div>
         <a href="contact.php" class="btn">Get in Touch</a>
     </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Stats Counter Animation
+        const statItems = document.querySelectorAll('.stat-item h4');
+        let countersStarted = false;
+        
+        function startCounting() {
+            if (countersStarted) return;
+            
+            statItems.forEach(stat => {
+                const target = parseInt(stat.textContent.replace(/\D/g, ''));
+                const duration = 2000; // 2 seconds
+                const increment = target / (duration / 16); // 60fps
+                let current = 0;
+                const isPercentage = stat.textContent.includes('%');
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        clearInterval(timer);
+                        stat.textContent = isPercentage ? target + '%' : target + '+';
+                    } else {
+                        stat.textContent = isPercentage ? Math.floor(current) + '%' : Math.floor(current) + '+';
+                    }
+                }, 16);
+            });
+            
+            countersStarted = true;
+        }
+        
+        // Check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.bottom >= 0
+            );
+        }
+        
+        // Timeline animation
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        function animateTimeline() {
+            timelineItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('animate-in');
+                }, 300 * index);
+            });
+        }
+        
+        // Team member enhanced interactivity
+        const teamMembers = document.querySelectorAll('.team-member');
+        
+        teamMembers.forEach(member => {
+            member.addEventListener('mouseenter', () => {
+                member.classList.add('active');
+            });
+            
+            member.addEventListener('mouseleave', () => {
+                member.classList.remove('active');
+            });
+        });
+        
+        // Add animation classes to elements
+        document.querySelectorAll('.value-item').forEach(item => {
+            item.classList.add('animate-on-scroll');
+        });
+        
+        document.querySelectorAll('.stat-item').forEach(item => {
+            item.classList.add('animate-on-scroll');
+        });
+        
+        // Function to check elements and animate them
+        function checkAnimations() {
+            // Check stats counter
+            const statsSection = document.querySelector('.stats');
+            if (statsSection && isInViewport(statsSection)) {
+                startCounting();
+            }
+            
+            // Check timeline animation
+            const timelineSection = document.querySelector('.timeline');
+            if (timelineSection && isInViewport(timelineSection) && !timelineSection.classList.contains('animated')) {
+                timelineSection.classList.add('animated');
+                animateTimeline();
+            }
+            
+            // Check and animate scroll animations
+            document.querySelectorAll('.animate-on-scroll').forEach(element => {
+                if (isInViewport(element) && !element.classList.contains('animated')) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+        
+        // Initial check
+        checkAnimations();
+        
+        // Check on scroll
+        window.addEventListener('scroll', checkAnimations);
+    });
+    </script>
+
     <?php include 'footer.php'; ?>
     <script type="module" src="js/main.js"></script>
 </body>

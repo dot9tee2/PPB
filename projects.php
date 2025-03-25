@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php
+    // Redirect to city_projects.php if city parameter is present
+    if (isset($_GET['city']) && !empty($_GET['city'])) {
+        $city = $_GET['city'];
+        $redirect_url = "city_projects.php?city=" . urlencode($city);
+        
+        // Add project parameter if present
+        if (isset($_GET['project']) && !empty($_GET['project'])) {
+            $project = $_GET['project'];
+            $redirect_url .= "&project=" . urlencode($project);
+        }
+        
+        header("Location: " . $redirect_url);
+        exit;
+    }
+    ?>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Real Estate Projects in Pakistan | Pakistan Properties and Builders</title>

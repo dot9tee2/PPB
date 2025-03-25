@@ -29,3 +29,54 @@ document.querySelectorAll("a").forEach((link) => {
     }
   });
 });
+
+// Counter animation for About Us section
+function animateCounter() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    statNumbers.forEach(number => {
+        const target = parseInt(number.getAttribute('data-count'));
+        const duration = 2000; // 2 seconds
+        const step = target / duration * 20; // Update every 20ms
+        let current = 0;
+        
+        const counterAnimation = setInterval(() => {
+            current += step;
+            
+            if (current >= target) {
+                number.textContent = target;
+                clearInterval(counterAnimation);
+            } else {
+                number.textContent = Math.floor(current);
+            }
+        }, 20);
+    });
+}
+
+// Check if element is in viewport
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.bottom >= 0
+    );
+}
+
+// Trigger counter animation when About Us section is visible
+function handleScrollAnimation() {
+    const aboutSection = document.querySelector('.about-stats');
+    
+    if (aboutSection && isInViewport(aboutSection)) {
+        animateCounter();
+        // Remove event listener once animation is triggered
+        window.removeEventListener('scroll', handleScrollAnimation);
+    }
+}
+
+// Add scroll event listener
+window.addEventListener('scroll', handleScrollAnimation);
+
+// Check on initial load in case section is already visible
+document.addEventListener('DOMContentLoaded', function() {
+    handleScrollAnimation();
+});

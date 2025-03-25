@@ -13,15 +13,17 @@
 
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-md);
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px; /* Reduced from 30px */
+  margin-top: 25px; /* Reduced from 30px */
 }
 
 .blog-card {
-  background: var(--white);
-  border-radius: 5px;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column; /* Stack content vertically */
   padding: var(--spacing-md);
@@ -44,9 +46,10 @@
 }
 
 .blog-card h3 {
+  font-size: 18px; /* Reduced from 20px */
+  padding: 0 15px;
+  margin: 15px 0; /* Reduced from 20px 0 */
   color: var(--dark-green);
-  font-size: 20px;
-  margin: var(--spacing-sm) 0;
 }
 
 .blog-card .meta {
@@ -60,6 +63,9 @@
   margin: 0 0 var(--spacing-md);
   flex-grow: 1; /* Allow text to fill space */
   overflow: hidden;
+  font-size: 14px; /* Reduced from 16px */
+  padding: 0 15px;
+  margin-bottom: 15px; /* Reduced from 20px */
 }
 
 .read-more {
@@ -250,4 +256,64 @@
   .blog-sidebar {
     padding-left: var(--spacing-md); /* Reset padding on mobile */
   }
+}
+
+/* Blog Post Page */
+.blog-post {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.blog-post-header {
+  text-align: center;
+  margin-bottom: 25px; /* Reduced from 30px */
+}
+
+.blog-post-header h1 {
+  font-size: 32px; /* Reduced from 36px */
+  margin-bottom: 10px;
+}
+
+.blog-post-meta {
+  color: #666;
+  font-size: 14px; /* Reduced from 16px */
+  margin-bottom: 15px; /* Reduced from 20px */
+}
+
+.blog-post-content {
+  line-height: 1.6;
+  font-size: 15px; /* Reduced from 18px */
+}
+
+.blog-post-content p {
+  margin-bottom: 15px; /* Reduced from 20px */
+}
+
+.blog-post-content h2 {
+  font-size: 24px; /* Reduced from 28px */
+  margin: 25px 0 15px; /* Reduced from 30px 0 20px */
+}
+
+.blog-post-content h3 {
+  font-size: 20px; /* Reduced from 24px */
+  margin: 20px 0 10px; /* Reduced from 25px 0 15px */
+}
+
+.blog-post-content ul, 
+.blog-post-content ol {
+  margin: 15px 0; /* Reduced from 20px 0 */
+  padding-left: 20px; /* Reduced from 25px */
+}
+
+.blog-post-content li {
+  margin-bottom: 8px; /* Reduced from 10px */
+}
+
+.blog-post-content blockquote {
+  border-left: 4px solid var(--dark-green);
+  margin: 15px 0; /* Reduced from 20px 0 */
+  padding: 10px 15px; /* Reduced from 15px 20px */
+  background-color: #f5f5f5;
+  font-style: italic;
 }

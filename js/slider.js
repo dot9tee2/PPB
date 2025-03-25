@@ -11,12 +11,28 @@ export function initSlider() {
   let currentIndex = 0;
 
   const updateSlider = (index) => {
-    document.querySelector(".slides").style.transform = `translateX(-${
-      index * 100
-    }%)`;
-    slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
-    navDots.forEach((dot) => dot.classList.remove("active"));
-    navDots[index].classList.add("active");
+    const slidesContainer = document.querySelector(".slides");
+    if (slidesContainer) {
+      slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+      
+      // Update active class for slides
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.add("active");
+        } else {
+          slide.classList.remove("active");
+        }
+      });
+      
+      // Update active class for nav dots
+      navDots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add("active");
+        } else {
+          dot.classList.remove("active");
+        }
+      });
+    }
   };
 
   const showNextSlide = () => {
@@ -29,6 +45,10 @@ export function initSlider() {
     updateSlider(currentIndex);
   };
 
+  // Initialize the first slide
+  updateSlider(currentIndex);
+
+  // Add event listeners
   nextButton.addEventListener("click", showNextSlide);
   prevButton.addEventListener("click", showPrevSlide);
 
@@ -39,5 +59,18 @@ export function initSlider() {
     });
   });
 
-  setInterval(showNextSlide, 5000); // Auto-slide every 5 seconds
+  // Auto-slide every 5 seconds
+  const autoSlideInterval = setInterval(showNextSlide, 5000);
+  
+  // Pause auto-slide when hovering over the slider
+  const slidesContainer = document.querySelector(".testimonials-slider");
+  if (slidesContainer) {
+    slidesContainer.addEventListener("mouseenter", () => {
+      clearInterval(autoSlideInterval);
+    });
+    
+    slidesContainer.addEventListener("mouseleave", () => {
+      setInterval(showNextSlide, 5000);
+    });
+  }
 }
