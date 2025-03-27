@@ -1,7 +1,11 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /includes/
+Disallow: /admin.php
+Disallow: /manage-*.php
 Disallow: /db_connect.php
 
-Sitemap: https://www.pakistanpropertiesandbuilders.com/sitemap.xml
+# Sitemap location
+Sitemap: https://pakistanpropertiesandbuilders.com/sitemap.xml
+
+# Crawl-delay to prevent server overload
+Crawl-delay: 10
