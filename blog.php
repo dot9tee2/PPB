@@ -95,66 +95,195 @@
     <div class="blog-container">
         <div class="blog-main">
             <h1>Real Estate Blog</h1>
+            
+            <!-- Search and Filter Section -->
+            <div class="blog-filters">
+                <form action="" method="GET" class="search-form">
+                    <input type="text" name="search" placeholder="Search blog posts..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" />
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
             <div class="blog-grid">
                 <?php
                 include 'db_connect.php';
                 $posts_per_page = 6;
                 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                 $offset = ($page - 1) * $posts_per_page;
-                $sql = "SELECT * FROM blog_posts ORDER BY publish_date DESC LIMIT ? OFFSET ?";
+                
+                // Build the query based on filters
+                $where_conditions = [];
+                $params = [];
+                $types = "";
+                
+                if (isset($_GET['search']) && !empty($_GET['search'])) {
+                    $where_conditions[] = "(title LIKE ? OR excerpt LIKE ? OR content LIKE ?)";
+                    $search_term = "%" . $_GET['search'] . "%";
+                    $params = array_merge($params, [$search_term, $search_term, $search_term]);
+                    $types .= "sss";
+                }
+                
+                if (isset($_GET['category']) && !empty($_GET['category'])) {
+                    $where_conditions[] = "category = ?";
+                    $params[] = $_GET['category'];
+                    $types .= "s";
+                }
+                
+                $sql = "SELECT * FROM blog_posts";
+                if (!empty($where_conditions)) {
+                    $sql .= " WHERE " . implode(" AND ", $where_conditions);
+                }
+                $sql .= " ORDER BY publish_date DESC LIMIT ? OFFSET ?";
+                
+                $params[] = $posts_per_page;
+                $params[] = $offset;
+                $types .= "ii";
+                
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("ii", $posts_per_page, $offset);
+                if (!empty($params)) {
+                    $stmt->bind_param($types, ...$params);
+                }
                 $stmt->execute();
                 $blogs = $stmt->get_result();
-                while ($blog = $blogs->fetch_assoc()):
+                
+                if ($blogs->num_rows > 0):
+                    while ($blog = $blogs->fetch_assoc()):
                 ?>
                     <div class="blog-card">
                         <a href="blog-post.php?id=<?php echo $blog['id']; ?>">
                             <?php if ($blog['featured_image']): ?>
-                                <img loading="lazy" src="<?php echo htmlspecialchars($blog['featured_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" />
+                                <div class="blog-image">
+                                    <img loading="lazy" src="<?php echo htmlspecialchars($blog['featured_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" />
+                                </div>
                             <?php endif; ?>
-                            <h3><?php echo htmlspecialchars($blog['title']); ?></h3>
-                            <p class="meta">Posted on <?php echo htmlspecialchars($blog['publish_date']); ?></p>
-                            <p><?php echo htmlspecialchars(substr($blog['excerpt'], 0, 120) . (strlen($blog['excerpt']) > 120 ? '...' : '')); ?></p>
+                            <div class="blog-content">
+                                <?php if ($blog['category']): ?>
+                                    <span class="blog-category"><?php echo htmlspecialchars($blog['category']); ?></span>
+                                <?php endif; ?>
+                                <h3><?php echo htmlspecialchars($blog['title']); ?></h3>
+                                <p class="meta">
+                                    <i class="far fa-calendar"></i> <?php echo date('F j, Y', strtotime($blog['publish_date'])); ?>
+                                </p>
+                                <p class="excerpt"><?php echo htmlspecialchars(substr($blog['excerpt'], 0, 120) . (strlen($blog['excerpt']) > 120 ? '...' : '')); ?></p>
+                            </div>
                         </a>
-                        <div>
+                        <div class="blog-footer">
                             <a href="blog-post.php?id=<?php echo $blog['id']; ?>" class="btn">Read More</a>
                         </div>
                     </div>
                 <?php
-                endwhile;
-                $stmt->close();
-                $sql = "SELECT COUNT(*) as total FROM blog_posts";
-                $result = $conn->query($sql);
-                $total_posts = $result->fetch_assoc()['total'];
-                $total_pages = ceil($total_posts / $posts_per_page);
+                    endwhile;
+                else:
                 ?>
+                    <div class="no-results">
+                        <p>No blog posts found. Try adjusting your search or filters.</p>
+                    </div>
+                <?php endif; ?>
+                
+                <?php
+                // Get total posts count for pagination
+                $count_sql = "SELECT COUNT(*) as total FROM blog_posts";
+                if (!empty($where_conditions)) {
+                    $count_sql .= " WHERE " . implode(" AND ", $where_conditions);
+                }
+                $count_stmt = $conn->prepare($count_sql);
+                if (!empty($params)) {
+                    array_pop($params); // Remove limit
+                    array_pop($params); // Remove offset
+                    $count_stmt->bind_param(substr($types, 0, -2), ...$params);
+                }
+                $count_stmt->execute();
+                $total_posts = $count_stmt->get_result()->fetch_assoc()['total'];
+                $total_pages = ceil($total_posts / $posts_per_page);
+                
+                // Pagination
+                if ($total_pages > 1):
+                ?>
+                    <div class="pagination">
+                        <?php if ($page > 1): ?>
+                            <a href="?page=<?php echo $page-1; ?><?php echo isset($_GET['search']) ? '&search='.urlencode($_GET['search']) : ''; ?><?php echo isset($_GET['category']) ? '&category='.urlencode($_GET['category']) : ''; ?>" class="page-link">&laquo; Previous</a>
+                        <?php endif; ?>
+                        
+                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                            <a href="?page=<?php echo $i; ?><?php echo isset($_GET['search']) ? '&search='.urlencode($_GET['search']) : ''; ?><?php echo isset($_GET['category']) ? '&category='.urlencode($_GET['category']) : ''; ?>" 
+                               class="page-link <?php echo $i === $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
+                        <?php endfor; ?>
+                        
+                        <?php if ($page < $total_pages): ?>
+                            <a href="?page=<?php echo $page+1; ?><?php echo isset($_GET['search']) ? '&search='.urlencode($_GET['search']) : ''; ?><?php echo isset($_GET['category']) ? '&category='.urlencode($_GET['category']) : ''; ?>" class="page-link">Next &raquo;</a>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
+        
         <aside class="blog-sidebar">
             <div class="sidebar-section">
                 <h3>Categories</h3>
                 <ul>
                     <?php
-                    $sql = "SELECT DISTINCT category FROM blog_posts WHERE category IS NOT NULL";
+                    $sql = "SELECT category, COUNT(*) as count FROM blog_posts WHERE category IS NOT NULL GROUP BY category ORDER BY count DESC";
                     $categories = $conn->query($sql);
                     while ($cat = $categories->fetch_assoc()):
                     ?>
-                        <li><a href="blog.php?category=<?php echo urlencode($cat['category']); ?>"><?php echo htmlspecialchars($cat['category']); ?></a></li>
+                        <li>
+                            <a href="?category=<?php echo urlencode($cat['category']); ?><?php echo isset($_GET['search']) ? '&search='.urlencode($_GET['search']) : ''; ?>" 
+                               class="<?php echo isset($_GET['category']) && $_GET['category'] === $cat['category'] ? 'active' : ''; ?>">
+                                <?php echo htmlspecialchars($cat['category']); ?>
+                                <span class="count">(<?php echo $cat['count']; ?>)</span>
+                            </a>
+                        </li>
                     <?php endwhile; ?>
                 </ul>
             </div>
+            
             <div class="sidebar-section">
                 <h3>Recent Posts</h3>
                 <ul>
                     <?php
-                    $sql = "SELECT id, title FROM blog_posts ORDER BY publish_date DESC LIMIT 5";
+                    $sql = "SELECT id, title, featured_image, publish_date FROM blog_posts ORDER BY publish_date DESC LIMIT 5";
                     $recent = $conn->query($sql);
                     while ($post = $recent->fetch_assoc()):
                     ?>
-                        <li><a href="blog-post.php?id=<?php echo $post['id']; ?>"><?php echo htmlspecialchars($post['title']); ?></a></li>
+                        <li>
+                            <a href="blog-post.php?id=<?php echo $post['id']; ?>">
+                                <?php if ($post['featured_image']): ?>
+                                    <img loading="lazy" src="<?php echo htmlspecialchars($post['featured_image']); ?>" alt="<?php echo htmlspecialchars($post['title']); ?>" />
+                                <?php endif; ?>
+                                <div class="recent-post-info">
+                                    <h4><?php echo htmlspecialchars($post['title']); ?></h4>
+                                    <span class="date"><?php echo date('M j, Y', strtotime($post['publish_date'])); ?></span>
+                                </div>
+                            </a>
+                        </li>
                     <?php endwhile; ?>
                 </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Popular Tags</h3>
+                <div class="tag-cloud">
+                    <?php
+                    $sql = "SELECT tags FROM blog_posts WHERE tags IS NOT NULL";
+                    $tags_result = $conn->query($sql);
+                    $all_tags = [];
+                    while ($row = $tags_result->fetch_assoc()) {
+                        $tags = explode(',', $row['tags']);
+                        foreach ($tags as $tag) {
+                            $tag = trim($tag);
+                            if (!empty($tag)) {
+                                $all_tags[$tag] = isset($all_tags[$tag]) ? $all_tags[$tag] + 1 : 1;
+                            }
+                        }
+                    }
+                    arsort($all_tags);
+                    $popular_tags = array_slice($all_tags, 0, 10);
+                    foreach ($popular_tags as $tag => $count):
+                    ?>
+                        <a href="?tag=<?php echo urlencode($tag); ?><?php echo isset($_GET['search']) ? '&search='.urlencode($_GET['search']) : ''; ?>" 
+                           class="tag"><?php echo htmlspecialchars($tag); ?></a>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </aside>
     </div>
