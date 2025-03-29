@@ -10,17 +10,20 @@ RewriteCond %{HTTPS} off
 RewriteCond %{HTTP_HOST} ^(?:www\.)?(.*)$
 RewriteRule (.*) https://%1/$1 [L,R=301]
 
-# Blog post URL rewriting
-RewriteRule ^blog/([a-zA-Z0-9-]+)/?$ blog-post.php?slug=$1 [QSA,L]
+# Remove .php extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Handle blog post URLs
+RewriteRule ^blog/([^/]+)/?$ blog-post.php?slug=$1 [L,QSA]
+
+# Handle blog category URLs
+RewriteRule ^blog/category/([^/]+)/?$ blog.php?category=$1 [L,QSA]
 
 # Remove trailing slashes
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)/$ /$1 [L,R=301]
-
-# Handle PHP file extensions
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 # Prevent directory browsing
 Options -Indexes

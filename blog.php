@@ -96,14 +96,6 @@
         <div class="blog-main">
             <h1>Real Estate Blog</h1>
             
-            <!-- Search and Filter Section -->
-            <div class="blog-filters">
-                <form action="" method="GET" class="search-form">
-                    <input type="text" name="search" placeholder="Search blog posts..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" />
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                </form>
-            </div>
-
             <div class="blog-grid">
                 <?php
                 include 'db_connect.php';
@@ -115,13 +107,6 @@
                 $where_conditions = [];
                 $params = [];
                 $types = "";
-                
-                if (isset($_GET['search']) && !empty($_GET['search'])) {
-                    $where_conditions[] = "(title LIKE ? OR excerpt LIKE ? OR content LIKE ?)";
-                    $search_term = "%" . $_GET['search'] . "%";
-                    $params = array_merge($params, [$search_term, $search_term, $search_term]);
-                    $types .= "sss";
-                }
                 
                 if (isset($_GET['category']) && !empty($_GET['category'])) {
                     $where_conditions[] = "category = ?";
@@ -150,7 +135,7 @@
                     while ($blog = $blogs->fetch_assoc()):
                 ?>
                     <div class="blog-card">
-                        <a href="blog-post.php?id=<?php echo $blog['id']; ?>">
+                        <a href="blog-post.php?slug=<?php echo htmlspecialchars($blog['slug']); ?>">
                             <?php if ($blog['featured_image']): ?>
                                 <div class="blog-image">
                                     <img loading="lazy" src="<?php echo htmlspecialchars($blog['featured_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" />
@@ -168,7 +153,7 @@
                             </div>
                         </a>
                         <div class="blog-footer">
-                            <a href="blog-post.php?id=<?php echo $blog['id']; ?>" class="btn">Read More</a>
+                            <a href="blog-post.php?slug=<?php echo htmlspecialchars($blog['slug']); ?>" class="btn">Read More</a>
                         </div>
                     </div>
                 <?php
@@ -190,7 +175,9 @@
                 if (!empty($params)) {
                     array_pop($params); // Remove limit
                     array_pop($params); // Remove offset
-                    $count_stmt->bind_param(substr($types, 0, -2), ...$params);
+                    if (!empty($params)) {  // Only bind if we still have parameters after removing limit and offset
+                        $count_stmt->bind_param(substr($types, 0, -2), ...$params);
+                    }
                 }
                 $count_stmt->execute();
                 $total_posts = $count_stmt->get_result()->fetch_assoc()['total'];
@@ -201,16 +188,16 @@
                 ?>
                     <div class="pagination">
                         <?php if ($page > 1): ?>
-                            <a href="?page=<?php echo $page-1; ?><?php echo isset($_GET['search']) ? '&search='.urlencode($_GET['search']) : ''; ?><?php echo isset($_GET['category']) ? '&category='.urlencode($_GET['category']) : ''; ?>" class="page-link">&laquo; Previous</a>
+                            <a href="?page=<?php echo $page-1; ?><?php echo isset($_GET['category']) ? '&category='.urlencode($_GET['category']) : ''; ?>" class="page-link">&laquo; Previous</a>
                         <?php endif; ?>
                         
                         <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <a href="?page=<?php echo $i; ?><?php echo isset($_GET['search']) ? '&search='.urlencode($_GET['search']) : ''; ?><?php echo isset($_GET['category']) ? '&category='.urlencode($_GET['category']) : ''; ?>" 
+                            <a href="?page=<?php echo $i; ?><?php echo isset($_GET['category']) ? '&category='.urlencode($_GET['category']) : ''; ?>" 
                                class="page-link <?php echo $i === $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
                         <?php endfor; ?>
                         
                         <?php if ($page < $total_pages): ?>
-                            <a href="?page=<?php echo $page+1; ?><?php echo isset($_GET['search']) ? '&search='.urlencode($_GET['search']) : ''; ?><?php echo isset($_GET['category']) ? '&category='.urlencode($_GET['category']) : ''; ?>" class="page-link">Next &raquo;</a>
+                            <a href="?page=<?php echo $page+1; ?><?php echo isset($_GET['category']) ? '&category='.urlencode($_GET['category']) : ''; ?>" class="page-link">Next &raquo;</a>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
@@ -227,7 +214,7 @@
                     while ($cat = $categories->fetch_assoc()):
                     ?>
                         <li>
-                            <a href="?category=<?php echo urlencode($cat['category']); ?><?php echo isset($_GET['search']) ? '&search='.urlencode($_GET['search']) : ''; ?>" 
+                            <a href="?category=<?php echo urlencode($cat['category']); ?>" 
                                class="<?php echo isset($_GET['category']) && $_GET['category'] === $cat['category'] ? 'active' : ''; ?>">
                                 <?php echo htmlspecialchars($cat['category']); ?>
                                 <span class="count">(<?php echo $cat['count']; ?>)</span>
@@ -264,25 +251,37 @@
                 <h3>Popular Tags</h3>
                 <div class="tag-cloud">
                     <?php
-                    $sql = "SELECT tags FROM blog_posts WHERE tags IS NOT NULL";
-                    $tags_result = $conn->query($sql);
-                    $all_tags = [];
-                    while ($row = $tags_result->fetch_assoc()) {
-                        $tags = explode(',', $row['tags']);
-                        foreach ($tags as $tag) {
-                            $tag = trim($tag);
-                            if (!empty($tag)) {
-                                $all_tags[$tag] = isset($all_tags[$tag]) ? $all_tags[$tag] + 1 : 1;
+                    // First check if tags column exists
+                    $check_column = $conn->query("SHOW COLUMNS FROM blog_posts LIKE 'tags'");
+                    if ($check_column->num_rows > 0) {
+                        $sql = "SELECT tags FROM blog_posts WHERE tags IS NOT NULL AND tags != ''";
+                        $tags_result = $conn->query($sql);
+                        $all_tags = [];
+                        if ($tags_result && $tags_result->num_rows > 0) {
+                            while ($row = $tags_result->fetch_assoc()) {
+                                $tags = explode(',', $row['tags']);
+                                foreach ($tags as $tag) {
+                                    $tag = trim($tag);
+                                    if (!empty($tag)) {
+                                        $all_tags[$tag] = isset($all_tags[$tag]) ? $all_tags[$tag] + 1 : 1;
+                                    }
+                                }
                             }
+                            arsort($all_tags);
+                            $popular_tags = array_slice($all_tags, 0, 10);
+                            foreach ($popular_tags as $tag => $count):
+                                ?>
+                                <a href="?tag=<?php echo urlencode($tag); ?>" 
+                                   class="tag"><?php echo htmlspecialchars($tag); ?> <span class="tag-count">(<?php echo $count; ?>)</span></a>
+                                <?php
+                            endforeach;
+                        } else {
+                            echo '<p>No tags available yet.</p>';
                         }
+                    } else {
+                        echo '<p>Tags feature coming soon!</p>';
                     }
-                    arsort($all_tags);
-                    $popular_tags = array_slice($all_tags, 0, 10);
-                    foreach ($popular_tags as $tag => $count):
                     ?>
-                        <a href="?tag=<?php echo urlencode($tag); ?><?php echo isset($_GET['search']) ? '&search='.urlencode($_GET['search']) : ''; ?>" 
-                           class="tag"><?php echo htmlspecialchars($tag); ?></a>
-                    <?php endforeach; ?>
                 </div>
             </div>
         </aside>
