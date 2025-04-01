@@ -4,6 +4,11 @@ RewriteEngine On
 # Set base directory for local XAMPP setup
 RewriteBase /mywebsite/
 
+# Handle page routing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
 # Handle 404 errors with custom error page
 ErrorDocument 404 /mywebsite/404.php
 
