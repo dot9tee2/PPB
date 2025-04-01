@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expert Real Estate Services in Pakistan | Pakistan Properties and Builders</title>
-    <meta name="description" content="Pakistan Properties and Builders offers comprehensive real estate services including property sales, investment consultation, and property management in Lahore, Islamabad, and Sialkot. Contact us today!" />
-    <meta name="keywords" content="real estate services, Pakistan Properties, property sales, investment consultation, property management, Lahore real estate, Islamabad properties, Sialkot real estate, DHA Lahore, Bahria Town" />
+    <title>Our Services - Pakistan Properties and Builders | Premium Real Estate Solutions</title>
+    <meta name="description" content="Explore our comprehensive real estate services including property sales, investment consultation, project management, and legal assistance across Pakistan's major cities." />
+    <meta name="keywords" content="real estate services Pakistan, property management, investment consultation, legal assistance, property sales" />
+    
+    <?php
+    require_once 'includes/seo.php';
+    outputCanonicalTag();
+    outputMetaRobots();
+    outputAlternateHreflang($_SERVER['REQUEST_URI']);
+    ?>
+    
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/footer.css" />

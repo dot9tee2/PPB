@@ -1,0 +1,13 @@
+/* Load Boxicons from cdnjs (CORS-enabled) */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css');
+
+/* Fallback font loading */
+@font-face {
+    font-family: 'boxicons';
+    font-weight: normal;
+    font-style: normal;
+    src: url('https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/fonts/boxicons.woff2') format('woff2'),
+         url('https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/fonts/boxicons.woff') format('woff'),
+         url('https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/fonts/boxicons.ttf') format('truetype');
+    font-display: swap;
+} 

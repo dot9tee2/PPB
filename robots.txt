@@ -1,11 +1,37 @@
+# Global rules for all robots
 User-agent: *
 Allow: /
+Allow: /projects/
+Allow: /blog/
+Allow: /services/
+Allow: /about/
+Allow: /contact/
+Allow: /details/
+
+# Disallow sensitive files and directories
 Disallow: /admin.php
 Disallow: /manage-*.php
 Disallow: /db_connect.php
+Disallow: /includes/
+Disallow: /uploads/
+Disallow: /media/
+Disallow: /js/
+Disallow: /css/
+Disallow: /*.php$
+Disallow: /*?*
 
 # Sitemap location
 Sitemap: https://pakistanpropertiesandbuilders.com/sitemap.xml
 
 # Crawl-delay to prevent server overload
 Crawl-delay: 10
+
+# Additional rules for specific bots
+User-agent: Googlebot
+Crawl-delay: 5
+
+User-agent: Bingbot
+Crawl-delay: 5
+
+User-agent: Yandex
+Crawl-delay: 5

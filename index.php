@@ -6,6 +6,14 @@
     <title>Pakistan Properties and Builders - Premium Real Estate in Lahore, Islamabad & Sialkot</title>
     <meta name="description" content="Premier real estate agency offering luxury homes, commercial properties, and investment opportunities in Lahore, Islamabad, and Sialkot. Expert consultation and property management services." />
     <meta name="keywords" content="real estate Pakistan, property for sale Lahore, Islamabad real estate, Sialkot property market, luxury homes DHA, commercial property Pakistan, real estate investment, Pakistan Properties and Builders" />
+    
+    <?php
+    require_once 'includes/seo.php';
+    outputCanonicalTag();
+    outputMetaRobots();
+    outputAlternateHreflang('/');
+    ?>
+    
     <!-- Twitter Card tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Pakistan Properties and Builders - Premium Real Estate Experts" />

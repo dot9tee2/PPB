@@ -16,7 +16,7 @@
     <meta name="twitter:title" content="About Pakistan Properties and Builders" />
     <meta name="twitter:description" content="Learn more about Pakistan Properties and Builders, a leading real estate agency in Lahore, Islamabad and Sialkot." />
     <meta name="twitter:image" content="https://www.pakistanpropertiesandbuilders.com/media/logoFinal.png" />
-    <title>Pakistan Properties and Builders - About</title>
+    <title>About Us - Pakistan Properties and Builders | Your Trusted Real Estate Partner</title>
     <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
     <link rel="sitemap" type="application/xml" href="https://www.pakistanpropertiesandbuilders.com/sitemap.xml" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
@@ -69,17 +69,17 @@
     })(window, document, 'script', 'dataLayer', 'GTM-KT8KVRFM');
     </script>
     <!-- End Google Tag Manager -->
+    <?php
+    require_once 'includes/seo.php';
+    outputCanonicalTag();
+    outputMetaRobots();
+    outputAlternateHreflang($_SERVER['REQUEST_URI']);
+    ?>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KT8KVRFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <div class="preloader">
-        <div class="loader-container">
-            <div class="loader"></div>
-            <img src="media/logoFinal.png" alt="Company Logo" />
-        </div>
-    </div>
     <?php include 'navbar.php'; ?>
     <section class="about-us">
         <h2>About Pakistan Properties and Builders</h2>

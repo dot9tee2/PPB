@@ -1,29 +1,11 @@
 # Enable rewriting
 RewriteEngine On
 
-# Handle 404 errors
-ErrorDocument 404 /404.php
+# Set base directory for local XAMPP setup
+RewriteBase /mywebsite/
 
-# Force HTTPS and remove www
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [OR]
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} ^(?:www\.)?(.*)$
-RewriteRule (.*) https://%1/$1 [L,R=301]
-
-# Remove .php extension
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
-
-# Handle blog post URLs
-RewriteRule ^blog/([^/]+)/?$ blog-post.php?slug=$1 [L,QSA]
-
-# Handle blog category URLs
-RewriteRule ^blog/category/([^/]+)/?$ blog.php?category=$1 [L,QSA]
-
-# Remove trailing slashes
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)/$ /$1 [L,R=301]
+# Handle 404 errors with custom error page
+ErrorDocument 404 /mywebsite/404.php
 
 # Prevent directory browsing
 Options -Indexes
@@ -35,7 +17,6 @@ Options -Indexes
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set X-XSS-Protection "1; mode=block"
-    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 </IfModule>
 
 # Browser caching
@@ -63,4 +44,15 @@ Options -Indexes
     AddOutputFilterByType DEFLATE application/rss+xml
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
-</IfModule> 
+</IfModule>
+
+# Block access to sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "^(composer\.json|composer\.lock|package\.json|package-lock\.json|\.env|\.gitignore|README\.md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch> 

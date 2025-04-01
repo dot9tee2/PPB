@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Get in touch with Pakistan Properties and Builders for expert advice on buying, selling, and investing in properties." />
     <meta name="keywords" content="contact, Pakistan Properties, real estate, Lahore, Islamabad, Sialkot" />
+    
+    <?php
+    require_once 'includes/seo.php';
+    outputCanonicalTag();
+    outputMetaRobots();
+    outputAlternateHreflang($_SERVER['REQUEST_URI']);
+    ?>
+    
     <!-- Open Graph tags -->
     <meta property="og:title" content="Contact Us - Pakistan Properties and Builders" />
     <meta property="og:description" content="Get in touch with Pakistan Properties and Builders for expert advice on buying, selling, and investing in properties." />
     <meta property="og:image" content="https://www.pakistanpropertiesandbuilders.com/media/contact-cover.jpg" />
-    <meta property="og:url" content="https://www.pakistanpropertiesandbuilders.com/contact.php" />
+    <meta property="og:url" content="https://www.pakistanpropertiesandbuilders.com/contact" />
     <meta property="og:type" content="website" />
     <!-- Twitter Card tags -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -98,12 +106,6 @@
 </head>
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KT8KVRFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <div class="preloader">
-        <div class="loader-container">
-            <div class="loader"></div>
-            <img src="media/logoFinal.png" alt="Company Logo" />
-        </div>
-    </div>
     <?php include 'navbar.php'; ?>
     <div class="contact">
         <div class="contact-content">
@@ -117,11 +119,20 @@
         </div>
         <div class="contact-details">
             <h2>Reach Out</h2>
-            <p><i class="bx bx-phone"></i> <a href="tel:+923216817568">03216817568</a></p>
+            <p><i class="bx bx-phone"></i> <a href="tel:+923216817568">0321-6817568</a></p>
             <p><i class="bx bx-envelope"></i> <a href="mailto:info@pakistanproperties.com">info@pakistanproperties.com</a></p>
             <p><i class="bx bx-map"></i> <a href="https://maps.app.goo.gl/gSNPJPyuh93aJWii9" target="_blank">93, Block A DHA Commercial Broadway, Lahore, 54810</a></p>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.815!2d74.357158!3d31.520369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39191b4e8e6e3b8b%3A0x5e6f9b5f5e5e5e5!2sDHA%20Lahore!5e0!3m2!1sen!2s!4v1698765432100!5m2!1sen!2s" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" title="Pakistan Properties and Builders Office Location in DHA Lahore"></iframe>
+                <iframe 
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBwrsrJI8IYP2daDdDyScPYe2IldbxGphs&q=31.4697959,74.4483873&zoom=17"
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Pakistan Properties and Builders Office Location"
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
     </div>

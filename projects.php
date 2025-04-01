@@ -89,12 +89,6 @@
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KT8KVRFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <div class="preloader">
-        <div class="loader-container">
-            <div class="loader"></div>
-            <img src="media/logoFinal.png" alt="Company Logo" />
-        </div>
-    </div>
     <?php include 'navbar.php'; ?>
     <section class="featured-listings animate-on-scroll">
         <h2>Featured Projects</h2>

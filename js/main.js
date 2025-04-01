@@ -1,33 +1,84 @@
 // main.js
 
-import { showPreloader, hidePreloader } from "./preloader.js";
-import { initSlider } from "./slider.js";
-import { initSidebar } from "./sidebar.js";
-import { initCarousel } from "./carousel.js";
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 
-document.addEventListener("DOMContentLoaded", () => {
-  initSlider();
-  initSidebar();
-  initCarousel();
+    // Initialize animations on scroll
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementBottom = element.getBoundingClientRect().bottom;
+            const isVisible = (elementTop < window.innerHeight) && (elementBottom >= 0);
+            
+            if (isVisible) {
+                element.classList.add('animated');
+            }
+        });
+    };
 
-  // ✅ Now calling hidePreloader() properly
-  window.addEventListener("load", hidePreloader);
-});
+    // Run animation check on load and scroll
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll();
 
-// Apply preloader when navigating between pages
-document.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", function (e) {
-    const href = this.getAttribute("href");
-
-    if (href && href !== "#" && !this.classList.contains("no-preloader")) {
-      e.preventDefault();
-      showPreloader();
-
-      setTimeout(() => {
-        window.location.href = href;
-      }, 700);
+    // Handle mobile menu
+    const menuBtn = document.querySelector('.menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            menuBtn.classList.toggle('active');
+        });
     }
-  });
+
+    // Initialize form validation
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (!form.checkValidity()) {
+                e.preventDefault();
+                Array.from(form.elements).forEach(input => {
+                    if (!input.checkValidity()) {
+                        input.classList.add('invalid');
+                    }
+                });
+            }
+        });
+
+        // Remove invalid class on input
+        form.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.checkValidity()) {
+                    this.classList.remove('invalid');
+                }
+            });
+        });
+    });
+
+    // Initialize lazy loading for images
+    if ('loading' in HTMLImageElement.prototype) {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        images.forEach(img => {
+            img.src = img.dataset.src;
+        });
+    } else {
+        // Fallback for browsers that don't support lazy loading
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+        document.body.appendChild(script);
+    }
 });
 
 // Counter animation for About Us section
