@@ -25,9 +25,9 @@ $canonicalUrl = $protocol . $host . $uri;
   <div class="navbar">
     <i class="bx bx-menu sidebarOpen"></i>
     <div class="brand-container">
-      <a href="/mywebsite/index.php">
+      <a href="index.php">
         <div class="logo">
-          <img src="/mywebsite/media/logoFinal.png" alt="Company Logo" />
+          <img src="media/logoFinal.png" alt="Company Logo" />
         </div>
         <div class="company-name">
           <h2 id="pk">PAKISTAN</h2>
@@ -39,7 +39,7 @@ $canonicalUrl = $protocol . $host . $uri;
     <div class="nav-links">
       <div class="logo-toggle">
         <div class="logo">
-          <img src="/mywebsite/media/logoFinal.png" alt="Pakistan Properties and Builders Logo" />
+          <img src="media/logoFinal.png" alt="Pakistan Properties and Builders Logo" />
         </div>
         <div class="company-name">
           <h2>PAKISTAN</h2>
@@ -48,12 +48,12 @@ $canonicalUrl = $protocol . $host . $uri;
         <i class="bx bx-x sidebarClose"></i>
       </div>
       <ul>
-        <li><a href="/mywebsite/index.php">Home</a></li>
-        <li><a href="/mywebsite/about.php">About</a></li>
-        <li><a href="/mywebsite/services.php">Services</a></li>
-        <li><a href="/mywebsite/projects.php">Projects</a></li>
-        <li><a href="/mywebsite/blog.php">Blogs</a></li>
-        <li><a href="/mywebsite/contact.php">Contact</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="about.php">About</a></li>
+        <li><a href="services.php">Services</a></li>
+        <li><a href="projects.php">Projects</a></li>
+        <li><a href="blog.php">Blogs</a></li>
+        <li><a href="contact.php">Contact</a></li>
       </ul>
     </div>
     <div class="social-icons">
