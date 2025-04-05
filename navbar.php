@@ -25,7 +25,7 @@ $canonicalUrl = $protocol . $host . $uri;
   <div class="navbar">
     <i class="bx bx-menu sidebarOpen"></i>
     <div class="brand-container">
-      <a href="index.php">
+      <a href="/">
         <div class="logo">
           <img src="media/logoFinal.png" alt="Company Logo" />
         </div>
@@ -48,12 +48,12 @@ $canonicalUrl = $protocol . $host . $uri;
         <i class="bx bx-x sidebarClose"></i>
       </div>
       <ul>
-        <li><a href="index.php">Home</a></li>
-        <li><a href="about.php">About</a></li>
-        <li><a href="services.php">Services</a></li>
-        <li><a href="projects.php">Projects</a></li>
-        <li><a href="blog.php">Blogs</a></li>
-        <li><a href="contact.php">Contact</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li><a href="services">Services</a></li>
+        <li><a href="projects">Projects</a></li>
+        <li><a href="blog">Blogs</a></li>
+        <li><a href="contact">Contact</a></li>
       </ul>
     </div>
     <div class="social-icons">

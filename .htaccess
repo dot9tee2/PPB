@@ -1,30 +1,45 @@
-# Enable rewriting
+# Enable URL rewriting
 RewriteEngine On
 
-# Set base directory for local XAMPP setup
-RewriteBase /mywebsite/
+# Set the base directory
+RewriteBase /
 
-# Handle page routing
-RewriteCond %{REQUEST_FILENAME} !-f
+# Prevent direct access to .php files
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# Internally add .php extension
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
-# Handle 404 errors with custom error page
-ErrorDocument 404 /mywebsite/404.php
+# Handle blog post URLs
+RewriteRule ^blog/([^/]+)/?$ blog-post.php?slug=$1 [L,QSA]
 
-# Prevent directory browsing
+# Handle 404 errors
+ErrorDocument 404 /404.php
+
+# Prevent directory listing
 Options -Indexes
 
-# Enable Keep-Alive
-<IfModule mod_headers.c>
-    Header set Connection keep-alive
-    # Add security headers
-    Header set X-Content-Type-Options "nosniff"
-    Header set X-Frame-Options "SAMEORIGIN"
-    Header set X-XSS-Protection "1; mode=block"
+# Protect .htaccess file
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Protect sensitive files
+<FilesMatch "^(db_connect\.php|\.gitignore)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json
 </IfModule>
 
-# Browser caching
+# Set browser caching
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresByType image/jpg "access plus 1 year"
@@ -34,30 +49,8 @@ Options -Indexes
     ExpiresByType image/webp "access plus 1 year"
     ExpiresByType text/css "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
-    ExpiresByType text/html "access plus 0 seconds"
-    ExpiresByType application/xhtml+xml "access plus 0 seconds"
-</IfModule>
-
-# Enable Gzip compression
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/plain
-    AddOutputFilterByType DEFLATE text/html
-    AddOutputFilterByType DEFLATE text/xml
-    AddOutputFilterByType DEFLATE text/css
-    AddOutputFilterByType DEFLATE application/xml
-    AddOutputFilterByType DEFLATE application/xhtml+xml
-    AddOutputFilterByType DEFLATE application/rss+xml
-    AddOutputFilterByType DEFLATE application/javascript
-    AddOutputFilterByType DEFLATE application/x-javascript
-</IfModule>
-
-# Block access to sensitive files
-<FilesMatch "^\.">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-<FilesMatch "^(composer\.json|composer\.lock|package\.json|package-lock\.json|\.env|\.gitignore|README\.md)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch> 
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+    ExpiresByType text/html "access plus 1 day"
+    ExpiresByType application/xhtml+xml "access plus 1 day"
+</IfModule> 

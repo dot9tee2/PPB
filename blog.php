@@ -9,7 +9,7 @@
     <meta property="og:title" content="Real Estate Insights & News | Pakistan Properties and Builders Blog" />
     <meta property="og:description" content="Stay updated with the latest real estate trends and insights. Read our blog for expert advice on buying, selling, and investing in properties." />
     <meta property="og:image" content="https://www.pakistanpropertiesandbuilders.com/media/blog-cover.jpg" />
-    <meta property="og:url" content="https://www.pakistanpropertiesandbuilders.com/blog.php" />
+    <meta property="og:url" content="https://www.pakistanpropertiesandbuilders.com/blog" />
     <meta property="og:type" content="website" />
     <!-- Twitter Card tags -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="Stay updated with the latest real estate trends and insights. Read our blog for expert advice on buying, selling, and investing in properties." />
     <meta name="twitter:image" content="https://www.pakistanpropertiesandbuilders.com/media/blog-cover.jpg" />
     <title>Real Estate Insights & News | Pakistan Properties and Builders Blog</title>
-    <link rel="canonical" href="https://www.pakistanpropertiesandbuilders.com/blog.php" />
+    <link rel="canonical" href="https://www.pakistanpropertiesandbuilders.com/blog" />
     <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
     <link rel="sitemap" type="application/xml" href="https://www.pakistanpropertiesandbuilders.com/sitemap.xml" />
     <link rel="stylesheet" href="css/navbar.css" />
@@ -52,7 +52,7 @@
         "@type": "BreadcrumbList",
         "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.pakistanpropertiesandbuilders.com/" },
-            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.pakistanpropertiesandbuilders.com/blog.php" }
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.pakistanpropertiesandbuilders.com/blog" }
         ]
     }
     </script>
@@ -70,8 +70,8 @@
                 "url": "https://www.pakistanpropertiesandbuilders.com/logo.png"
             }
         },
-        "url": "https://www.pakistanpropertiesandbuilders.com/blog.php",
-        "mainEntityOfPage": "https://www.pakistanpropertiesandbuilders.com/blog.php"
+        "url": "https://www.pakistanpropertiesandbuilders.com/blog",
+        "mainEntityOfPage": "https://www.pakistanpropertiesandbuilders.com/blog"
     }
     </script>
     <!-- Google Tag Manager -->
@@ -135,7 +135,7 @@
                     while ($blog = $blogs->fetch_assoc()):
                 ?>
                     <div class="blog-card">
-                        <a href="blog-post.php?slug=<?php echo htmlspecialchars($blog['slug']); ?>">
+                        <a href="blog/<?php echo htmlspecialchars($blog['slug']); ?>">
                             <?php if ($blog['featured_image']): ?>
                                 <div class="blog-image">
                                     <img loading="lazy" src="<?php echo htmlspecialchars($blog['featured_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" />
@@ -153,7 +153,7 @@
                             </div>
                         </a>
                         <div class="blog-footer">
-                            <a href="blog-post.php?slug=<?php echo htmlspecialchars($blog['slug']); ?>" class="btn">Read More</a>
+                            <a href="blog/<?php echo htmlspecialchars($blog['slug']); ?>" class="btn">Read More</a>
                         </div>
                     </div>
                 <?php
@@ -214,7 +214,7 @@
                     while ($cat = $categories->fetch_assoc()):
                     ?>
                         <li>
-                            <a href="?category=<?php echo urlencode($cat['category']); ?>" 
+                            <a href="blog?category=<?php echo urlencode($cat['category']); ?>" 
                                class="<?php echo isset($_GET['category']) && $_GET['category'] === $cat['category'] ? 'active' : ''; ?>">
                                 <?php echo htmlspecialchars($cat['category']); ?>
                                 <span class="count">(<?php echo $cat['count']; ?>)</span>
@@ -233,7 +233,7 @@
                     while ($post = $recent->fetch_assoc()):
                     ?>
                         <li>
-                            <a href="blog-post.php?id=<?php echo $post['id']; ?>">
+                            <a href="blog/<?php echo htmlspecialchars($post['slug']); ?>">
                                 <?php if ($post['featured_image']): ?>
                                     <img loading="lazy" src="<?php echo htmlspecialchars($post['featured_image']); ?>" alt="<?php echo htmlspecialchars($post['title']); ?>" />
                                 <?php endif; ?>

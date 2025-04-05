@@ -2,6 +2,49 @@
 session_start();
 include 'db_connect.php';
 
+// Function to generate SEO-friendly slugs
+function generateSlug($string) {
+    // Convert to lowercase
+    $string = strtolower($string);
+    
+    // Replace spaces with hyphens
+    $string = preg_replace('/\s+/', '-', $string);
+    
+    // Remove special characters
+    $string = preg_replace('/[^a-z0-9-]/', '', $string);
+    
+    // Remove multiple consecutive hyphens
+    $string = preg_replace('/-+/', '-', $string);
+    
+    // Trim hyphens from beginning and end
+    $string = trim($string, '-');
+    
+    return $string;
+}
+
+// Function to ensure unique slugs
+function getUniqueSlug($conn, $title) {
+    $baseSlug = generateSlug($title);
+    $slug = $baseSlug;
+    $counter = 1;
+    
+    while (true) {
+        $sql = "SELECT COUNT(*) as count FROM blog_posts WHERE slug = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $slug);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+        
+        if ($result['count'] == 0) {
+            return $slug;
+        }
+        
+        $slug = $baseSlug . '-' . $counter;
+        $counter++;
+    }
+}
+
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: admin.php");
     exit;
@@ -14,6 +57,9 @@ if (isset($_POST['add_blog'])) {
     $content = $_POST['content'];
     $category = !empty($_POST['category']) ? $_POST['category'] : null;
     $publish_date = $_POST['publish_date'];
+    
+    // Generate unique slug from title
+    $slug = getUniqueSlug($conn, $title);
 
     $featured_image = null;
     if (!empty($_FILES['featured_image']['name'])) {
@@ -23,9 +69,9 @@ if (isset($_POST['add_blog'])) {
         $featured_image = $image_path;
     }
 
-    $sql = "INSERT INTO blog_posts (title, excerpt, content, featured_image, category, publish_date) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO blog_posts (title, excerpt, content, featured_image, category, publish_date, slug) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssss", $title, $excerpt, $content, $featured_image, $category, $publish_date);
+    $stmt->bind_param("sssssss", $title, $excerpt, $content, $featured_image, $category, $publish_date, $slug);
     $stmt->execute();
     $stmt->close();
     header("Location: " . basename(__FILE__)); // Reload the page
@@ -40,6 +86,28 @@ if (isset($_POST['edit_blog']) && isset($_POST['edit_id'])) {
     $content = $_POST['content'];
     $category = !empty($_POST['category']) ? $_POST['category'] : null;
     $publish_date = $_POST['publish_date'];
+
+    // Check if title has changed and update slug if necessary
+    $sql = "SELECT title FROM blog_posts WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+
+    if ($result['title'] !== $title) {
+        // Title has changed, generate new unique slug
+        $slug = getUniqueSlug($conn, $title);
+    } else {
+        // Title hasn't changed, keep existing slug
+        $sql = "SELECT slug FROM blog_posts WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        $slug = $result['slug'];
+        $stmt->close();
+    }
 
     $featured_image = null;
     if (!empty($_FILES['featured_image']['name'])) {
@@ -58,9 +126,9 @@ if (isset($_POST['edit_blog']) && isset($_POST['edit_id'])) {
         $stmt->close();
     }
 
-    $sql = "UPDATE blog_posts SET title=?, excerpt=?, content=?, featured_image=?, category=?, publish_date=? WHERE id=?";
+    $sql = "UPDATE blog_posts SET title=?, excerpt=?, content=?, featured_image=?, category=?, publish_date=?, slug=? WHERE id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssi", $title, $excerpt, $content, $featured_image, $category, $publish_date, $id);
+    $stmt->bind_param("sssssssi", $title, $excerpt, $content, $featured_image, $category, $publish_date, $slug, $id);
     $stmt->execute();
     $stmt->close();
     header("Location: " . basename(__FILE__)); // Reload the page

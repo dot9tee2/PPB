@@ -31,7 +31,7 @@ if (!$blog) {
     <meta property="og:title" content="<?php echo htmlspecialchars($blog['title']); ?>" />
     <meta property="og:description" content="<?php echo htmlspecialchars(substr($blog['excerpt'], 0, 160)); ?>" />
     <meta property="og:image" content="<?php echo htmlspecialchars($blog['featured_image'] ?? 'https://www.pakistanpropertiesandbuilders.com/media/default-blog.jpg'); ?>" />
-    <meta property="og:url" content="https://www.pakistanpropertiesandbuilders.com/blog-post.php?slug=<?php echo htmlspecialchars($blog_slug); ?>" />
+    <meta property="og:url" content="https://www.pakistanpropertiesandbuilders.com/blog/<?php echo htmlspecialchars($blog_slug); ?>" />
     <meta property="og:type" content="article" />
     <meta property="article:published_time" content="<?php echo htmlspecialchars($blog['publish_date']); ?>" />
     <meta property="article:author" content="<?php echo htmlspecialchars($blog['author'] ?? 'Admin'); ?>" />
@@ -50,7 +50,7 @@ if (!$blog) {
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" />
-    <link rel="canonical" href="https://www.pakistanpropertiesandbuilders.com/blog-post.php?slug=<?php echo htmlspecialchars($blog_slug); ?>" />
+    <link rel="canonical" href="https://www.pakistanpropertiesandbuilders.com/blog/<?php echo htmlspecialchars($blog_slug); ?>" />
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -74,7 +74,7 @@ if (!$blog) {
         "dateModified": "<?php echo htmlspecialchars($blog['update_date'] ?? $blog['publish_date']); ?>",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https://www.pakistanpropertiesandbuilders.com/blog-post.php?slug=<?php echo htmlspecialchars($blog_slug); ?>"
+            "@id": "https://www.pakistanpropertiesandbuilders.com/blog/<?php echo htmlspecialchars($blog_slug); ?>"
         }
     }
     </script>
@@ -85,7 +85,7 @@ if (!$blog) {
         "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.pakistanpropertiesandbuilders.com/" },
             { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.pakistanpropertiesandbuilders.com/blog.php" },
-            { "@type": "ListItem", "position": 3, "name": "<?php echo htmlspecialchars($blog['title']); ?>", "item": "https://www.pakistanpropertiesandbuilders.com/blog-post.php?slug=<?php echo htmlspecialchars($blog_slug); ?>" }
+            { "@type": "ListItem", "position": 3, "name": "<?php echo htmlspecialchars($blog['title']); ?>", "item": "https://www.pakistanpropertiesandbuilders.com/blog/<?php echo htmlspecialchars($blog_slug); ?>" }
         ]
     }
     </script>
@@ -130,9 +130,9 @@ if (!$blog) {
                 </article>
                 <div class="social-share">
                     <h3>Share This Post</h3>
-                    <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog-post.php?slug=' . $blog_slug); ?>&text=<?php echo urlencode($blog['title']); ?>" target="_blank" aria-label="Share on Twitter"><i class='bx bxl-twitter'></i></a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog-post.php?slug=' . $blog_slug); ?>" target="_blank" aria-label="Share on Facebook"><i class='bx bxl-facebook'></i></a>
-                    <a href="https://api.whatsapp.com/send?text=<?php echo urlencode($blog['title'] . ' - https://pakistanpropertiesandbuilders.com/blog-post.php?slug=' . $blog_slug); ?>" target="_blank" aria-label="Share on WhatsApp"><i class='bx bxl-whatsapp'></i></a>
+                    <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>&text=<?php echo urlencode($blog['title']); ?>" target="_blank" aria-label="Share on Twitter"><i class='bx bxl-twitter'></i></a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" target="_blank" aria-label="Share on Facebook"><i class='bx bxl-facebook'></i></a>
+                    <a href="https://api.whatsapp.com/send?text=<?php echo urlencode($blog['title'] . ' - https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" target="_blank" aria-label="Share on WhatsApp"><i class='bx bxl-whatsapp'></i></a>
                 </div>
                 <h2>Related Posts</h2>
                 <div class="blog-grid">
@@ -150,7 +150,7 @@ if (!$blog) {
                             <h3><?php echo htmlspecialchars($post['title']); ?></h3>
                             <p class="meta">Posted on <?php echo htmlspecialchars($post['publish_date']); ?></p>
                             <p><?php echo htmlspecialchars(substr($post['excerpt'], 0, 100) . (strlen($post['excerpt']) > 100 ? '...' : '')); ?></p>
-                            <a href="blog-post.php?slug=<?php echo $post['slug']; ?>" class="btn">Read More</a>
+                            <a href="blog/<?php echo $post['slug']; ?>" class="btn">Read More</a>
                         </div>
                     <?php
                     endwhile;
@@ -183,7 +183,7 @@ if (!$blog) {
                     $recent = $conn->query($sql);
                     while ($post = $recent->fetch_assoc()):
                     ?>
-                        <li><a href="blog-post.php?slug=<?php echo $post['slug']; ?>"><?php echo htmlspecialchars($post['title']); ?></a></li>
+                        <li><a href="blog/<?php echo $post['slug']; ?>"><?php echo htmlspecialchars($post['title']); ?></a></li>
                     <?php endwhile; ?>
                 </ul>
             </div>
