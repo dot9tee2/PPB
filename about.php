@@ -17,16 +17,16 @@
     <meta name="twitter:description" content="Learn more about Pakistan Properties and Builders, a leading real estate agency in Lahore, Islamabad and Sialkot." />
     <meta name="twitter:image" content="https://www.pakistanpropertiesandbuilders.com/media/logoFinal.png" />
     <title>About Us - Pakistan Properties and Builders | Your Trusted Real Estate Partner</title>
-    <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
-    <link rel="sitemap" type="application/xml" href="https://www.pakistanpropertiesandbuilders.com/sitemap.xml" />
+    <link rel="icon" type="image/x-icon" href="/media/favicon.ico" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" />
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" href="css/about.css" />
-    <link rel="canonical" href="https://www.pakistanpropertiesandbuilders.com/about.php" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/about.css" />
+    <link rel="canonical" href="https://www.pakistanpropertiesandbuilders.com/about" />
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -69,12 +69,6 @@
     })(window, document, 'script', 'dataLayer', 'GTM-KT8KVRFM');
     </script>
     <!-- End Google Tag Manager -->
-    <?php
-    require_once 'includes/seo.php';
-    outputCanonicalTag();
-    outputMetaRobots();
-    outputAlternateHreflang($_SERVER['REQUEST_URI']);
-    ?>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -105,7 +99,7 @@
         </div>
         <h3>Meet Our CEO</h3>
         <div class="ceo-profile">
-            <img src="media/ceo.jpeg" alt="Waqas Ahmed Khan, CEO of Pakistan Properties and Builders" class="ceo-image" loading="lazy" width="300" height="300" />
+            <img src="/media/ceo.jpeg" alt="Waqas Ahmed Khan, CEO of Pakistan Properties and Builders" class="ceo-image" loading="lazy" width="300" height="300" />
             <p>
                 Waqas Ahmed Khan, our founder and CEO, launched Pakistan Properties and Builders in 2018 with a bold vision: to make real estate accessible and stress-free for all Pakistanis, at home and abroad. With over a decade of experience in property development, Waqas leads our team with a commitment to innovation and client satisfaction.
             </p>
@@ -113,13 +107,13 @@
         <h3>Our Team</h3>
         <div class="team-grid">
             <div class="team-member">
-                <img src="media/male_placeholder.jpg" alt="Ali Hassan, Senior Property Consultant at Pakistan Properties" class="team-image" loading="lazy" />
+                <img src="/media/male_placeholder.jpg" alt="Ali Hassan, Senior Property Consultant at Pakistan Properties" class="team-image" loading="lazy" />
                 <h4>Ali Hassan</h4>
                 <p>Senior Property Consultant</p>
                 <p>With 8 years of experience, Ali specializes in residential properties.</p>
             </div>
             <div class="team-member">
-                <img src="media/male_placeholder.jpg" alt="Sana Malik, Marketing Director at Pakistan Properties" class="team-image" loading="lazy" />
+                <img src="/media/male_placeholder.jpg" alt="Sana Malik, Marketing Director at Pakistan Properties" class="team-image" loading="lazy" />
                 <h4>Sana Malik</h4>
                 <p>Marketing Director</p>
                 <p>Sana drives our outreach efforts with creativity and precision.</p>
@@ -157,7 +151,7 @@
                 <p>Top-tier service every time.</p>
             </div>
         </div>
-        <a href="contact.php" class="btn">Get in Touch</a>
+        <a href="/contact" class="btn">Get in Touch</a>
     </section>
 
     <script>

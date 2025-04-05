@@ -4,17 +4,25 @@ RewriteEngine On
 # Set the base directory
 RewriteBase /
 
+# Allow direct access to actual files and directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
 # Prevent direct access to .php files
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
 RewriteRule ^ %1 [R=301,L]
+
+# Handle blog post URLs
+RewriteRule ^blog/([^/]+)/?$ blog-post.php?slug=$1 [L,QSA]
+
+# Handle blog category URLs
+RewriteRule ^blog/category/([^/]+)/?$ blog.php?category=$1 [L,QSA]
 
 # Internally add .php extension
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
-
-# Handle blog post URLs
-RewriteRule ^blog/([^/]+)/?$ blog-post.php?slug=$1 [L,QSA]
 
 # Handle 404 errors
 ErrorDocument 404 /404.php
@@ -53,4 +61,9 @@ Options -Indexes
     ExpiresByType application/x-javascript "access plus 1 month"
     ExpiresByType text/html "access plus 1 day"
     ExpiresByType application/xhtml+xml "access plus 1 day"
-</IfModule> 
+</IfModule>
+
+# Add proper MIME types
+AddType application/javascript .js
+AddType text/css .css
+AddType image/webp .webp 

@@ -3,24 +3,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Our Services - Pakistan Properties and Builders | Premium Real Estate Solutions</title>
+    <title>Our Services - Pakistan Properties and Builders | Real Estate Solutions</title>
     <meta name="description" content="Explore our comprehensive real estate services including property sales, investment consultation, project management, and legal assistance across Pakistan's major cities." />
     <meta name="keywords" content="real estate services Pakistan, property management, investment consultation, legal assistance, property sales" />
     
-    <?php
-    require_once 'includes/seo.php';
-    outputCanonicalTag();
-    outputMetaRobots();
-    outputAlternateHreflang($_SERVER['REQUEST_URI']);
-    ?>
-    
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" href="css/services.css" media="all" />
-    <link rel="stylesheet" href="css/accessibility.css" />
+    <link rel="icon" type="image/x-icon" href="/media/favicon.ico" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/services.css" />
+    <link rel="canonical" href="https://www.pakistanpropertiesandbuilders.com/services" />
 </head>
 <body>
     <a href="#main-services" class="skip-to-content">Skip to main content</a>

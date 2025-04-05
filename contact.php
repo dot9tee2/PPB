@@ -7,10 +7,7 @@
     <meta name="keywords" content="contact, Pakistan Properties, real estate, Lahore, Islamabad, Sialkot" />
     
     <?php
-    require_once 'includes/seo.php';
-    outputCanonicalTag();
-    outputMetaRobots();
-    outputAlternateHreflang($_SERVER['REQUEST_URI']);
+    // Remove SEO function calls
     ?>
     
     <!-- Open Graph tags -->
@@ -25,16 +22,16 @@
     <meta name="twitter:description" content="Get in touch with Pakistan Properties and Builders for expert advice on buying, selling, and investing in properties." />
     <meta name="twitter:image" content="https://www.pakistanpropertiesandbuilders.com/media/contact-cover.jpg" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="canonical" href="https://www.pakistanpropertiesandbuilders.com/contact.php" />
-    <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" href="css/contact.css" />
-    <link rel="sitemap" type="application/xml" href="https://www.pakistanpropertiesandbuilders.com/sitemap.xml" />
+    <link rel="canonical" href="https://www.pakistanpropertiesandbuilders.com/contact" />
+    <link rel="icon" type="image/x-icon" href="/media/favicon.ico" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" />
-    <title>Contact Us - Pakistan Properties</title>
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/contact.css" />
+    <title>Contact Us - Pakistan Properties and Builders | Get in Touch</title>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",

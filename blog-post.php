@@ -41,12 +41,12 @@ if (!$blog) {
     <meta name="twitter:description" content="<?php echo htmlspecialchars(substr($blog['excerpt'], 0, 160)); ?>" />
     <meta name="twitter:image" content="<?php echo htmlspecialchars($blog['featured_image'] ?? 'https://www.pakistanpropertiesandbuilders.com/media/default-blog.jpg'); ?>" />
     <title><?php echo htmlspecialchars($blog['title']); ?></title>
-    <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
-    <link rel="sitemap" type="application/xml" href="https://www.pakistanpropertiesandbuilders.com/sitemap.xml" />
-    <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/blog.css" />
+    <link rel="icon" type="image/x-icon" href="/media/favicon.ico" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/blog.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" />
@@ -99,7 +99,7 @@ if (!$blog) {
                     <h1><?php echo htmlspecialchars($blog['title']); ?></h1>
                     <p class="meta">Posted by <?php echo htmlspecialchars($blog['author'] ?? 'Admin'); ?> on <?php echo htmlspecialchars($blog['publish_date']); ?></p>
                     <?php if ($blog['featured_image']): ?>
-                        <img src="<?php echo htmlspecialchars($blog['featured_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']) . ' featured image'; ?>" class="featured-image" />
+                        <img src="/<?php echo htmlspecialchars($blog['featured_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']) . ' featured image'; ?>" class="featured-image" />
                     <?php endif; ?>
                 </header>
                 <article class="blog-content">
@@ -146,7 +146,7 @@ if (!$blog) {
                         $image = !empty($post['featured_image']) ? htmlspecialchars($post['featured_image']) : 'media/blog.jpg';
                     ?>
                         <div class="blog-card">
-                            <img src="<?php echo $image; ?>" alt="<?php echo htmlspecialchars($post['title']); ?>" />
+                            <img src="/<?php echo $image; ?>" alt="<?php echo htmlspecialchars($post['title']); ?>" />
                             <h3><?php echo htmlspecialchars($post['title']); ?></h3>
                             <p class="meta">Posted on <?php echo htmlspecialchars($post['publish_date']); ?></p>
                             <p><?php echo htmlspecialchars(substr($post['excerpt'], 0, 100) . (strlen($post['excerpt']) > 100 ? '...' : '')); ?></p>
