@@ -313,7 +313,7 @@
         <div class="listings-grid">
             <div class="listing-card" itemscope itemtype="https://schema.org/Place">
                 <div class="image-container">
-                    <img loading="lazy" src="media/lahore.webp" alt="Real Estate in Lahore" width="400" height="300" itemprop="image" />
+                    <img loading="lazy" src="media/lahore.webp" alt="Real Estate in Lahore" width="400" height="300" itemprop="image" onerror="this.src='media/placeholder.jpg'; this.onerror='';" />
                     <div class="property-badge hot">Hot</div>
                 </div>
                 <div class="card-content">
@@ -330,7 +330,7 @@
             </div>
             <div class="listing-card" itemscope itemtype="https://schema.org/Place">
                 <div class="image-container">
-                    <img loading="lazy" src="media/Islamabad.webp" alt="Real Estate in Islamabad" width="400" height="300" itemprop="image" />
+                    <img loading="lazy" src="media/Islamabad.webp" alt="Real Estate in Islamabad" width="400" height="300" itemprop="image" onerror="this.src='media/placeholder.jpg'; this.onerror='';" />
                     <div class="property-badge featured">Featured</div>
                 </div>
                 <div class="card-content">
@@ -347,7 +347,7 @@
             </div>
             <div class="listing-card" itemscope itemtype="https://schema.org/Place">
                 <div class="image-container">
-                    <img loading="lazy" src="media/Sialkot.webp" alt="Real Estate in Sialkot" width="400" height="300" itemprop="image" />
+                    <img loading="lazy" src="media/Sialkot.webp" alt="Real Estate in Sialkot" width="400" height="300" itemprop="image" onerror="this.src='media/placeholder.jpg'; this.onerror='';" />
                     <div class="property-badge new">New</div>
                 </div>
                 <div class="card-content">
@@ -596,12 +596,16 @@
             include 'db_connect.php'; // Include database connection
             $sql = "SELECT * FROM blog_posts ORDER BY RAND() LIMIT 2"; // Fetch 2 random blog posts
             $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
+            if ($result && $result->num_rows > 0) {
                 while ($blog = $result->fetch_assoc()) {
                     $image = !empty($blog['featured_image']) ? htmlspecialchars($blog['featured_image']) : 'media/blog.jpg';
+                    // Verify if the image exists
+                    if (!file_exists($image)) {
+                        $image = 'media/blog.jpg'; // Fallback to default blog image
+                    }
                     echo '<div class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">';
                     echo '<meta itemprop="datePublished" content="' . htmlspecialchars($blog['publish_date']) . '">';
-                    echo '<img loading="lazy" src="' . $image . '" alt="' . htmlspecialchars($blog['title']) . '" itemprop="image" width="400" height="225" />';
+                    echo '<img loading="lazy" src="' . $image . '" alt="' . htmlspecialchars($blog['title']) . '" itemprop="image" width="400" height="225" onerror="this.src=\'media/blog.jpg\'; this.onerror=\'\';" />';
                     echo '<h3 itemprop="headline">' . htmlspecialchars($blog['title']) . '</h3>';
                     echo '<div class="blog-excerpt" itemprop="abstract">' . substr(htmlspecialchars($blog['content']), 0, 100) . '...</div>';
                     echo '<span itemprop="author" itemscope itemtype="https://schema.org/Person">';
@@ -611,14 +615,14 @@
                     echo '</div>';
                 }
             } else {
-                // Fallback if no blog posts are found
+                // Fallback if no blog posts are found or database error
                 echo '<div class="blog-card">';
-                echo '<img src="media/blog.jpg" alt="Real estate blog article placeholder image" width="400" height="225" />';
+                echo '<img src="media/blog.jpg" alt="Real estate blog article placeholder image" width="400" height="225" onerror="this.src=\'media/placeholder.jpg\'; this.onerror=\'\';" />';
                 echo '<h3>No Blog Posts Available</h3>';
                 echo '<a href="blog.php" class="btn">View All Articles</a>';
                 echo '</div>';
                 echo '<div class="blog-card">';
-                echo '<img loading="lazy" src="media/blog.jpg" alt="Real estate blog article placeholder image" width="400" height="225" />';
+                echo '<img loading="lazy" src="media/blog.jpg" alt="Real estate blog article placeholder image" width="400" height="225" onerror="this.src=\'media/placeholder.jpg\'; this.onerror=\'\';" />';
                 echo '<h3>Check Back Soon!</h3>';
                 echo '<a href="blog.php" class="btn">View All Articles</a>';
                 echo '</div>';
