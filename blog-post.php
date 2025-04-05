@@ -104,6 +104,25 @@ if (!$blog) {
                 </header>
                 <article class="blog-content">
                     <?php
+                    // Array of insightful real estate quotes
+                    $quotes = array(
+                        "Real estate is about smart decisions—invest wisely!",
+                        "The best investment on Earth is earth.",
+                        "Don't wait to buy real estate. Buy real estate and wait.",
+                        "Real estate cannot be lost or stolen, nor can it be carried away.",
+                        "Ninety percent of all millionaires become so through owning real estate.",
+                        "Buy land, they're not making it anymore.",
+                        "Real estate investing, even on a very small scale, remains a tried and true means of building an individual's cash flow and wealth.",
+                        "The best time to buy a home is always five years ago.",
+                        "Location, location, location - the three most important factors in real estate.",
+                        "In real estate, you make your money when you buy, not when you sell.",
+                        "Buying real estate is not only the best way, the quickest way, the safest way, but the only way to become wealthy.",
+                        "Real estate is an imperishable asset, ever increasing in value.",
+                        "Success in real estate starts when you believe you are worthy of it.",
+                        "The house you looked at today and wanted to think about until tomorrow may be the same house someone looked at yesterday and will buy today.",
+                        "Real estate provides the highest returns, the greatest values, and the least risk."
+                    );
+                    
                     $sections = explode('###', $blog['content']);
                     foreach ($sections as $index => $section) {
                         $section = trim($section);
@@ -119,8 +138,10 @@ if (!$blog) {
                                 }
                                 if ($content) {
                                     echo '<p>' . nl2br(htmlspecialchars($content)) . '</p>';
-                                    if ($index % 3 === 0) {
-                                        echo '<blockquote>"Real estate is about smart decisions—invest wisely!"</blockquote>';
+                                    // Show quote only every 5th section or at the end
+                                    if ($index % 5 === 0 || $index === count($sections) - 1) {
+                                        $random_quote = $quotes[array_rand($quotes)];
+                                        echo '<blockquote class="insight-quote">"' . htmlspecialchars($random_quote) . '"</blockquote>';
                                     }
                                 }
                             }
@@ -129,10 +150,191 @@ if (!$blog) {
                     ?>
                 </article>
                 <div class="social-share">
-                    <h3>Share This Post</h3>
-                    <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>&text=<?php echo urlencode($blog['title']); ?>" target="_blank" aria-label="Share on Twitter"><i class='bx bxl-twitter'></i></a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" target="_blank" aria-label="Share on Facebook"><i class='bx bxl-facebook'></i></a>
-                    <a href="https://api.whatsapp.com/send?text=<?php echo urlencode($blog['title'] . ' - https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" target="_blank" aria-label="Share on WhatsApp"><i class='bx bxl-whatsapp'></i></a>
+                    <h3>Share This Article</h3>
+                    <div class="share-buttons">
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" 
+                           target="_blank" 
+                           class="share-button facebook" 
+                           aria-label="Share on Facebook">
+                            <i class='bx bxl-facebook'></i>
+                            <span>Facebook</span>
+                        </a>
+
+                        <!-- Twitter/X -->
+                        <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>&text=<?php echo urlencode($blog['title']); ?>" 
+                           target="_blank" 
+                           class="share-button twitter" 
+                           aria-label="Share on Twitter">
+                            <i class='bx bxl-twitter'></i>
+                            <span>Twitter</span>
+                        </a>
+
+                        <!-- WhatsApp -->
+                        <a href="https://api.whatsapp.com/send?text=<?php echo urlencode($blog['title'] . ' - https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" 
+                           target="_blank" 
+                           class="share-button whatsapp" 
+                           aria-label="Share on WhatsApp">
+                            <i class='bx bxl-whatsapp'></i>
+                            <span>WhatsApp</span>
+                        </a>
+
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>&title=<?php echo urlencode($blog['title']); ?>&summary=<?php echo urlencode(substr($blog['excerpt'], 0, 100)); ?>" 
+                           target="_blank" 
+                           class="share-button linkedin" 
+                           aria-label="Share on LinkedIn">
+                            <i class='bx bxl-linkedin'></i>
+                            <span>LinkedIn</span>
+                        </a>
+
+                        <!-- Email -->
+                        <a href="mailto:?subject=<?php echo urlencode($blog['title']); ?>&body=<?php echo urlencode('Check out this interesting article: https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" 
+                           class="share-button email" 
+                           aria-label="Share via Email">
+                            <i class='bx bx-envelope'></i>
+                            <span>Email</span>
+                        </a>
+
+                        <!-- Copy Link Button -->
+                        <button onclick="copyPageUrl()" 
+                                class="share-button copy-link" 
+                                id="copyLinkBtn" 
+                                aria-label="Copy link to clipboard">
+                            <i class='bx bx-link'></i>
+                            <span>Copy Link</span>
+                        </button>
+                    </div>
+
+                    <!-- Add QR Code for the article -->
+                    <div class="qr-code">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" 
+                             alt="QR Code for this article" 
+                             loading="lazy">
+                        <p>Scan to read on mobile</p>
+                    </div>
+
+                    <script>
+                    function copyPageUrl() {
+                        const url = 'https://pakistanpropertiesandbuilders.com/blog/<?php echo $blog_slug; ?>';
+                        navigator.clipboard.writeText(url).then(function() {
+                            const btn = document.getElementById('copyLinkBtn');
+                            const originalText = btn.innerHTML;
+                            btn.innerHTML = '<i class="bx bx-check"></i><span>Copied!</span>';
+                            btn.classList.add('copied');
+                            
+                            setTimeout(function() {
+                                btn.innerHTML = originalText;
+                                btn.classList.remove('copied');
+                            }, 2000);
+                        }).catch(function(err) {
+                            console.error('Failed to copy URL: ', err);
+                        });
+                    }
+                    </script>
+
+                    <style>
+                    .social-share {
+                        margin: 2rem 0;
+                        padding: 1.5rem;
+                        background: var(--white);
+                        border-radius: 8px;
+                        text-align: center;
+                        box-shadow: var(--shadow);
+                    }
+
+                    .social-share h3 {
+                        margin-bottom: 1.5rem;
+                        color: #333;
+                        font-family: var(--font-primary);
+                        font-weight: 700;
+                    }
+
+                    .share-buttons {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 1rem;
+                        justify-content: center;
+                        margin-bottom: 1.5rem;
+                    }
+
+                    .share-button {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        padding: 0.8rem 1.2rem;
+                        border-radius: 5px;
+                        color: var(--white);
+                        text-decoration: none;
+                        transition: all 0.3s ease;
+                        border: none;
+                        cursor: pointer;
+                        font-size: 0.9rem;
+                        font-family: var(--font-secondary);
+                        font-weight: bold;
+                    }
+
+                    .share-button:hover {
+                        transform: translateY(-2px);
+                        background: var(--accent-color) !important;
+                        color: #333;
+                    }
+
+                    .share-button i {
+                        font-size: 1.2rem;
+                    }
+
+                    .facebook { background-color: var(--dark-green); }
+                    .twitter { background-color: var(--dark-green); }
+                    .whatsapp { background-color: var(--dark-green); }
+                    .linkedin { background-color: var(--dark-green); }
+                    .email { background-color: var(--dark-green); }
+                    .copy-link { background-color: var(--dark-green); }
+
+                    .copied {
+                        background-color: var(--accent-color) !important;
+                        color: #333 !important;
+                    }
+
+                    .qr-code {
+                        margin-top: 2rem;
+                        padding: 1rem;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 0.5rem;
+                        background: var(--white);
+                        border-radius: 8px;
+                        box-shadow: var(--shadow);
+                    }
+
+                    .qr-code img {
+                        border-radius: 8px;
+                        border: 2px solid var(--dark-green);
+                    }
+
+                    .qr-code p {
+                        color: #333;
+                        font-size: 0.9rem;
+                        font-family: var(--font-secondary);
+                    }
+
+                    @media (max-width: 768px) {
+                        .share-buttons {
+                            flex-direction: column;
+                            align-items: stretch;
+                        }
+
+                        .share-button {
+                            justify-content: center;
+                        }
+
+                        .social-share {
+                            margin: 1rem 0;
+                            padding: 1rem;
+                        }
+                    }
+                    </style>
                 </div>
                 <h2>Related Posts</h2>
                 <div class="blog-grid">
