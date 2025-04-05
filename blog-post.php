@@ -40,7 +40,7 @@ if (!$blog) {
     <meta name="twitter:title" content="<?php echo htmlspecialchars($blog['title']); ?>" />
     <meta name="twitter:description" content="<?php echo htmlspecialchars(substr($blog['excerpt'], 0, 160)); ?>" />
     <meta name="twitter:image" content="<?php echo htmlspecialchars($blog['featured_image'] ?? 'https://www.pakistanpropertiesandbuilders.com/media/default-blog.jpg'); ?>" />
-    <title><?php echo htmlspecialchars($blog['title']); ?></title>
+    <title><?php echo htmlspecialchars($blog['title']); ?> - Your Blog</title>
     <link rel="icon" type="image/x-icon" href="/media/favicon.ico" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="stylesheet" href="/css/navbar.css" />
@@ -89,20 +89,304 @@ if (!$blog) {
         ]
     }
     </script>
+    <style>
+    /* Base styles for blog container */
+    .blog-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        gap: 2rem;
+    }
+
+    .blog-main {
+        flex: 1;
+        min-width: 0; /* Prevents flex item from overflowing */
+    }
+
+    .blog-sidebar {
+        width: 300px;
+    }
+
+    /* Blog header styles */
+    .blog-header {
+        margin-bottom: 2rem;
+    }
+
+    .blog-header h1 {
+        font-size: 2.5rem;
+        color: var(--dark-green);
+        line-height: 1.3;
+        margin-bottom: 1rem;
+        font-family: var(--font-primary);
+    }
+
+    .blog-header .meta {
+        color: #666;
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .blog-header .featured-image {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+    }
+
+    /* Blog content styles */
+    .blog-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #333;
+    }
+
+    .blog-content p {
+        margin-bottom: 1.5rem;
+    }
+
+    .blog-content h2 {
+        color: var(--dark-green);
+        font-size: 1.8rem;
+        margin: 2rem 0 1rem;
+        font-family: var(--font-primary);
+    }
+
+    .blog-content blockquote {
+        border-left: 4px solid var(--dark-green);
+        margin: 2rem 0;
+        padding: 1rem 2rem;
+        background: #f8f9fa;
+        border-radius: 0 10px 10px 0;
+        font-style: italic;
+        color: #555;
+    }
+
+    /* Sidebar styles */
+    .sidebar-section {
+        background: var(--white);
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+    }
+
+    .sidebar-section h3 {
+        color: var(--dark-green);
+        margin-bottom: 1rem;
+        font-family: var(--font-primary);
+        font-size: 1.3rem;
+    }
+
+    .sidebar-section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar-section li {
+        margin-bottom: 0.8rem;
+    }
+
+    .sidebar-section a {
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .sidebar-section a:hover {
+        color: var(--dark-green);
+    }
+
+    /* Related posts grid */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .blog-card {
+        background: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .blog-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .blog-card h3 {
+        font-size: 1.2rem;
+        margin: 1rem;
+        color: var(--dark-green);
+    }
+
+    .blog-card p {
+        margin: 1rem;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .blog-card .btn {
+        margin: 0 1rem 1rem;
+        display: inline-block;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 1024px) {
+        .blog-container {
+            padding: 15px;
+            gap: 1.5rem;
+        }
+
+        .blog-sidebar {
+            width: 250px;
+        }
+
+        .blog-header h1 {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .blog-container {
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .blog-sidebar {
+            width: 100%;
+        }
+
+        .blog-header h1 {
+            font-size: 1.8rem;
+        }
+
+        .blog-content {
+            font-size: 1rem;
+        }
+
+        .blog-content h2 {
+            font-size: 1.5rem;
+        }
+
+        .blog-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .social-share {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+        }
+
+        .share-buttons {
+            gap: 0.8rem;
+        }
+
+        .share-button {
+            width: 45px;
+            height: 45px;
+        }
+
+        .share-button i {
+            font-size: 1.5rem;
+        }
+
+        .qr-code {
+            padding: 1rem;
+        }
+
+        .qr-code img {
+            width: 120px;
+            height: 120px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .blog-container {
+            padding: 10px;
+        }
+
+        .blog-header h1 {
+            font-size: 1.5rem;
+        }
+
+        .blog-header .meta {
+            font-size: 0.85rem;
+        }
+
+        .blog-content {
+            font-size: 0.95rem;
+        }
+
+        .blog-content h2 {
+            font-size: 1.3rem;
+        }
+
+        .blog-content blockquote {
+            padding: 0.8rem 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .sidebar-section {
+            padding: 1rem;
+        }
+
+        .sidebar-section h3 {
+            font-size: 1.2rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.1rem;
+        }
+
+        .social-share h3 {
+            font-size: 1.3rem;
+        }
+
+        .share-buttons {
+            gap: 0.6rem;
+        }
+
+        .share-button {
+            width: 40px;
+            height: 40px;
+        }
+
+        .share-button i {
+            font-size: 1.3rem;
+        }
+    }
+    </style>
 </head>
 <body>
     <?php include 'navbar.php'; ?>
     <div class="blog-container">
-        <div class="blog-main">
-            <?php if ($blog): ?>
+        <main class="blog-main">
+            <article>
                 <header class="blog-header">
                     <h1><?php echo htmlspecialchars($blog['title']); ?></h1>
-                    <p class="meta">Posted by <?php echo htmlspecialchars($blog['author'] ?? 'Admin'); ?> on <?php echo htmlspecialchars($blog['publish_date']); ?></p>
+                    <div class="meta">
+                        <span><i class='bx bx-calendar'></i> <?php echo date('F j, Y', strtotime($blog['publish_date'])); ?></span>
+                        <span><i class='bx bx-user'></i> <?php echo htmlspecialchars($blog['author'] ?? 'Admin'); ?></span>
+                        <span><i class='bx bx-folder'></i> <?php echo htmlspecialchars($blog['category'] ?? 'Uncategorized'); ?></span>
+                    </div>
                     <?php if ($blog['featured_image']): ?>
-                        <img src="/<?php echo htmlspecialchars($blog['featured_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']) . ' featured image'; ?>" class="featured-image" />
+                        <img class="featured-image" src="/<?php echo htmlspecialchars($blog['featured_image']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>">
                     <?php endif; ?>
                 </header>
-                <article class="blog-content">
+
+                <div class="blog-content">
                     <?php
                     // Array of insightful real estate quotes
                     $quotes = array(
@@ -148,243 +432,64 @@ if (!$blog) {
                         }
                     }
                     ?>
-                </article>
+                </div>
+
                 <div class="social-share">
-                    <h3>Share This Article</h3>
+                    <h3>Share this article</h3>
                     <div class="share-buttons">
-                        <!-- Facebook -->
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" 
-                           target="_blank" 
-                           class="share-button" 
-                           aria-label="Share on Facebook">
-                            <i class='bx bxl-facebook'></i>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" target="_blank" class="share-button">
+                            <i class="bx bxl-facebook-circle"></i>
                         </a>
-
-                        <!-- Twitter/X -->
-                        <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>&text=<?php echo urlencode($blog['title']); ?>" 
-                           target="_blank" 
-                           class="share-button" 
-                           aria-label="Share on Twitter">
-                            <i class='bx bxl-twitter'></i>
+                        <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>&text=<?php echo urlencode($blog['title']); ?>" target="_blank" class="share-button">
+                            <i class="bx bxl-twitter"></i>
                         </a>
-
-                        <!-- WhatsApp -->
-                        <a href="https://api.whatsapp.com/send?text=<?php echo urlencode($blog['title'] . ' - https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" 
-                           target="_blank" 
-                           class="share-button" 
-                           aria-label="Share on WhatsApp">
-                            <i class='bx bxl-whatsapp'></i>
+                        <a href="https://wa.me/?text=<?php echo urlencode($blog['title'] . ' ' . 'https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" target="_blank" class="share-button">
+                            <i class="bx bxl-whatsapp"></i>
                         </a>
-
-                        <!-- LinkedIn -->
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>&title=<?php echo urlencode($blog['title']); ?>&summary=<?php echo urlencode(substr($blog['excerpt'], 0, 100)); ?>" 
-                           target="_blank" 
-                           class="share-button" 
-                           aria-label="Share on LinkedIn">
-                            <i class='bx bxl-linkedin'></i>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>&title=<?php echo urlencode($blog['title']); ?>" target="_blank" class="share-button">
+                            <i class="bx bxl-linkedin-square"></i>
                         </a>
-
-                        <!-- Email -->
-                        <a href="mailto:?subject=<?php echo urlencode($blog['title']); ?>&body=<?php echo urlencode('Check out this interesting article: https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" 
-                           class="share-button" 
-                           aria-label="Share via Email">
-                            <i class='bx bx-envelope'></i>
+                        <a href="mailto:?subject=<?php echo urlencode($blog['title']); ?>&body=<?php echo urlencode('Check out this interesting article: https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" class="share-button">
+                            <i class="bx bx-envelope"></i>
                         </a>
-
-                        <!-- Copy Link Button -->
-                        <button onclick="copyPageUrl()" 
-                                class="share-button" 
-                                id="copyLinkBtn" 
-                                aria-label="Copy link to clipboard">
-                            <i class='bx bx-link'></i>
+                        <button class="share-button" onclick="copyToClipboard()">
+                            <i class="bx bx-link-alt"></i>
                         </button>
                     </div>
-
-                    <!-- Copy Link Success Message -->
-                    <div id="copySuccess" class="copy-success">Link copied to clipboard!</div>
-
-                    <!-- Add QR Code for the article -->
                     <div class="qr-code">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" 
-                             alt="QR Code for this article" 
-                             loading="lazy">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" alt="QR Code">
                         <p>Scan to read on mobile</p>
                     </div>
-
-                    <script>
-                    function copyPageUrl() {
-                        const url = 'https://pakistanpropertiesandbuilders.com/blog/<?php echo $blog_slug; ?>';
-                        navigator.clipboard.writeText(url).then(function() {
-                            const successMsg = document.getElementById('copySuccess');
-                            successMsg.classList.add('show');
-                            setTimeout(() => {
-                                successMsg.classList.remove('show');
-                            }, 2000);
-                        }).catch(function(err) {
-                            console.error('Failed to copy URL: ', err);
-                        });
-                    }
-                    </script>
-
-                    <style>
-                    .social-share {
-                        margin: 2.5rem auto;
-                        padding: 2rem;
-                        background: var(--white);
-                        border-radius: 10px;
-                        text-align: center;
-                        box-shadow: var(--shadow);
-                        max-width: 600px;
-                    }
-
-                    .social-share h3 {
-                        margin-bottom: 1.5rem;
-                        color: var(--dark-green);
-                        font-family: var(--font-primary);
-                        font-weight: 700;
-                        font-size: 1.5rem;
-                    }
-
-                    .share-buttons {
-                        display: flex;
-                        gap: 1rem;
-                        justify-content: center;
-                        margin-bottom: 2rem;
-                        flex-wrap: wrap;
-                    }
-
-                    .share-button {
-                        width: 50px;
-                        height: 50px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        border-radius: 50%;
-                        background: var(--dark-green);
-                        color: var(--white);
-                        text-decoration: none;
-                        transition: all 0.3s ease;
-                        border: none;
-                        cursor: pointer;
-                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                    }
-
-                    .share-button i {
-                        font-size: 1.5rem;
-                    }
-
-                    .share-button:hover {
-                        transform: translateY(-3px);
-                        background: var(--accent-color);
-                        color: #333;
-                        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-                    }
-
-                    .copy-success {
-                        position: fixed;
-                        bottom: 20px;
-                        left: 50%;
-                        transform: translateX(-50%) translateY(100px);
-                        background: var(--dark-green);
-                        color: var(--white);
-                        padding: 12px 24px;
-                        border-radius: 50px;
-                        font-size: 0.9rem;
-                        opacity: 0;
-                        transition: all 0.3s ease;
-                        z-index: 1000;
-                    }
-
-                    .copy-success.show {
-                        transform: translateX(-50%) translateY(0);
-                        opacity: 1;
-                    }
-
-                    .qr-code {
-                        margin-top: 2rem;
-                        padding: 1.5rem;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        gap: 1rem;
-                        background: #f8f9fa;
-                        border-radius: 10px;
-                        border: 2px dashed var(--dark-green);
-                    }
-
-                    .qr-code img {
-                        width: 150px;
-                        height: 150px;
-                        border-radius: 10px;
-                        padding: 10px;
-                        background: white;
-                        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                    }
-
-                    .qr-code p {
-                        color: var(--dark-green);
-                        font-size: 0.9rem;
-                        font-family: var(--font-secondary);
-                        font-weight: 600;
-                        margin: 0;
-                    }
-
-                    @media (max-width: 768px) {
-                        .social-share {
-                            margin: 1.5rem 1rem;
-                            padding: 1.5rem;
-                        }
-
-                        .share-buttons {
-                            gap: 0.8rem;
-                        }
-
-                        .share-button {
-                            width: 45px;
-                            height: 45px;
-                        }
-
-                        .share-button i {
-                            font-size: 1.3rem;
-                        }
-
-                        .qr-code img {
-                            width: 120px;
-                            height: 120px;
-                        }
-                    }
-                    </style>
+                    <div class="copy-success" id="copySuccess">Link copied to clipboard!</div>
                 </div>
-                <h2>Related Posts</h2>
-                <div class="blog-grid">
-                    <?php
-                    $sql = "SELECT * FROM blog_posts WHERE slug != ? ORDER BY publish_date DESC LIMIT 3";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("s", $blog_slug);
-                    $stmt->execute();
-                    $related = $stmt->get_result();
-                    while ($post = $related->fetch_assoc()):
-                        $image = !empty($post['featured_image']) ? htmlspecialchars($post['featured_image']) : 'media/blog.jpg';
-                    ?>
-                        <div class="blog-card">
-                            <img src="/<?php echo $image; ?>" alt="<?php echo htmlspecialchars($post['title']); ?>" />
-                            <h3><?php echo htmlspecialchars($post['title']); ?></h3>
-                            <p class="meta">Posted on <?php echo htmlspecialchars($post['publish_date']); ?></p>
-                            <p><?php echo htmlspecialchars(substr($post['excerpt'], 0, 100) . (strlen($post['excerpt']) > 100 ? '...' : '')); ?></p>
-                            <a href="blog/<?php echo $post['slug']; ?>" class="btn">Read More</a>
-                        </div>
-                    <?php
-                    endwhile;
-                    $stmt->close();
-                    ?>
-                </div>
-            <?php else: ?>
-                <h1>Blog Post Not Found</h1>
-                <p>Sorry, the blog post you're looking for doesn't exist.</p>
-            <?php endif; ?>
-        </div>
+            </article>
+
+            <h2>Related Posts</h2>
+            <section class="blog-grid">
+                <?php
+                $sql = "SELECT * FROM blog_posts WHERE slug != ? ORDER BY publish_date DESC LIMIT 3";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("s", $blog_slug);
+                $stmt->execute();
+                $related = $stmt->get_result();
+                while ($post = $related->fetch_assoc()):
+                    $image = !empty($post['featured_image']) ? htmlspecialchars($post['featured_image']) : 'media/blog.jpg';
+                ?>
+                    <article class="blog-card">
+                        <img src="/<?php echo $image; ?>" alt="<?php echo htmlspecialchars($post['title']); ?>" />
+                        <h3><?php echo htmlspecialchars($post['title']); ?></h3>
+                        <p class="meta">Posted on <?php echo htmlspecialchars($post['publish_date']); ?></p>
+                        <p><?php echo htmlspecialchars(substr($post['excerpt'], 0, 100) . (strlen($post['excerpt']) > 100 ? '...' : '')); ?></p>
+                        <a href="blog/<?php echo $post['slug']; ?>" class="btn">Read More</a>
+                    </article>
+                <?php
+                endwhile;
+                $stmt->close();
+                ?>
+            </section>
+        </main>
         <aside class="blog-sidebar">
-            <div class="sidebar-section">
+            <section class="sidebar-section">
                 <h3>Categories</h3>
                 <ul>
                     <?php
@@ -395,8 +500,8 @@ if (!$blog) {
                         <li><a href="blog.php?category=<?php echo urlencode($cat['category']); ?>"><?php echo htmlspecialchars($cat['category']); ?></a></li>
                     <?php endwhile; ?>
                 </ul>
-            </div>
-            <div class="sidebar-section">
+            </section>
+            <section class="sidebar-section">
                 <h3>Recent Posts</h3>
                 <ul>
                     <?php
@@ -407,9 +512,21 @@ if (!$blog) {
                         <li><a href="blog/<?php echo $post['slug']; ?>"><?php echo htmlspecialchars($post['title']); ?></a></li>
                     <?php endwhile; ?>
                 </ul>
-            </div>
+            </section>
         </aside>
     </div>
     <?php include 'footer.php'; ?>
+
+    <script>
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const successMessage = document.getElementById('copySuccess');
+                successMessage.classList.add('show');
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
