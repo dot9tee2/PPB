@@ -27,7 +27,7 @@ $canonicalUrl = $protocol . $host . $uri;
     <div class="brand-container">
       <a href="/">
         <div class="logo">
-          <img src="media/logoFinal.png" alt="Company Logo" />
+          <img src="/media/logoFinal.png" alt="Company Logo" />
         </div>
         <div class="company-name">
           <h2 id="pk">PAKISTAN</h2>
@@ -39,7 +39,7 @@ $canonicalUrl = $protocol . $host . $uri;
     <div class="nav-links">
       <div class="logo-toggle">
         <div class="logo">
-          <img src="media/logoFinal.png" alt="Pakistan Properties and Builders Logo" />
+          <img src="/media/logoFinal.png" alt="Pakistan Properties and Builders Logo" />
         </div>
         <div class="company-name">
           <h2>PAKISTAN</h2>
