@@ -155,56 +155,53 @@ if (!$blog) {
                         <!-- Facebook -->
                         <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" 
                            target="_blank" 
-                           class="share-button facebook" 
+                           class="share-button" 
                            aria-label="Share on Facebook">
                             <i class='bx bxl-facebook'></i>
-                            <span>Facebook</span>
                         </a>
 
                         <!-- Twitter/X -->
                         <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>&text=<?php echo urlencode($blog['title']); ?>" 
                            target="_blank" 
-                           class="share-button twitter" 
+                           class="share-button" 
                            aria-label="Share on Twitter">
                             <i class='bx bxl-twitter'></i>
-                            <span>Twitter</span>
                         </a>
 
                         <!-- WhatsApp -->
                         <a href="https://api.whatsapp.com/send?text=<?php echo urlencode($blog['title'] . ' - https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" 
                            target="_blank" 
-                           class="share-button whatsapp" 
+                           class="share-button" 
                            aria-label="Share on WhatsApp">
                             <i class='bx bxl-whatsapp'></i>
-                            <span>WhatsApp</span>
                         </a>
 
                         <!-- LinkedIn -->
                         <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo urlencode('https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>&title=<?php echo urlencode($blog['title']); ?>&summary=<?php echo urlencode(substr($blog['excerpt'], 0, 100)); ?>" 
                            target="_blank" 
-                           class="share-button linkedin" 
+                           class="share-button" 
                            aria-label="Share on LinkedIn">
                             <i class='bx bxl-linkedin'></i>
-                            <span>LinkedIn</span>
                         </a>
 
                         <!-- Email -->
                         <a href="mailto:?subject=<?php echo urlencode($blog['title']); ?>&body=<?php echo urlencode('Check out this interesting article: https://pakistanpropertiesandbuilders.com/blog/' . $blog_slug); ?>" 
-                           class="share-button email" 
+                           class="share-button" 
                            aria-label="Share via Email">
                             <i class='bx bx-envelope'></i>
-                            <span>Email</span>
                         </a>
 
                         <!-- Copy Link Button -->
                         <button onclick="copyPageUrl()" 
-                                class="share-button copy-link" 
+                                class="share-button" 
                                 id="copyLinkBtn" 
                                 aria-label="Copy link to clipboard">
                             <i class='bx bx-link'></i>
-                            <span>Copy Link</span>
                         </button>
                     </div>
+
+                    <!-- Copy Link Success Message -->
+                    <div id="copySuccess" class="copy-success">Link copied to clipboard!</div>
 
                     <!-- Add QR Code for the article -->
                     <div class="qr-code">
@@ -218,14 +215,10 @@ if (!$blog) {
                     function copyPageUrl() {
                         const url = 'https://pakistanpropertiesandbuilders.com/blog/<?php echo $blog_slug; ?>';
                         navigator.clipboard.writeText(url).then(function() {
-                            const btn = document.getElementById('copyLinkBtn');
-                            const originalText = btn.innerHTML;
-                            btn.innerHTML = '<i class="bx bx-check"></i><span>Copied!</span>';
-                            btn.classList.add('copied');
-                            
-                            setTimeout(function() {
-                                btn.innerHTML = originalText;
-                                btn.classList.remove('copied');
+                            const successMsg = document.getElementById('copySuccess');
+                            successMsg.classList.add('show');
+                            setTimeout(() => {
+                                successMsg.classList.remove('show');
                             }, 2000);
                         }).catch(function(err) {
                             console.error('Failed to copy URL: ', err);
@@ -235,103 +228,129 @@ if (!$blog) {
 
                     <style>
                     .social-share {
-                        margin: 2rem 0;
-                        padding: 1.5rem;
+                        margin: 2.5rem auto;
+                        padding: 2rem;
                         background: var(--white);
-                        border-radius: 8px;
+                        border-radius: 10px;
                         text-align: center;
                         box-shadow: var(--shadow);
+                        max-width: 600px;
                     }
 
                     .social-share h3 {
                         margin-bottom: 1.5rem;
-                        color: #333;
+                        color: var(--dark-green);
                         font-family: var(--font-primary);
                         font-weight: 700;
+                        font-size: 1.5rem;
                     }
 
                     .share-buttons {
                         display: flex;
-                        flex-wrap: wrap;
                         gap: 1rem;
                         justify-content: center;
-                        margin-bottom: 1.5rem;
+                        margin-bottom: 2rem;
+                        flex-wrap: wrap;
                     }
 
                     .share-button {
+                        width: 50px;
+                        height: 50px;
                         display: flex;
                         align-items: center;
-                        gap: 0.5rem;
-                        padding: 0.8rem 1.2rem;
-                        border-radius: 5px;
+                        justify-content: center;
+                        border-radius: 50%;
+                        background: var(--dark-green);
                         color: var(--white);
                         text-decoration: none;
                         transition: all 0.3s ease;
                         border: none;
                         cursor: pointer;
-                        font-size: 0.9rem;
-                        font-family: var(--font-secondary);
-                        font-weight: bold;
-                    }
-
-                    .share-button:hover {
-                        transform: translateY(-2px);
-                        background: var(--accent-color) !important;
-                        color: #333;
+                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                     }
 
                     .share-button i {
-                        font-size: 1.2rem;
+                        font-size: 1.5rem;
                     }
 
-                    .facebook { background-color: var(--dark-green); }
-                    .twitter { background-color: var(--dark-green); }
-                    .whatsapp { background-color: var(--dark-green); }
-                    .linkedin { background-color: var(--dark-green); }
-                    .email { background-color: var(--dark-green); }
-                    .copy-link { background-color: var(--dark-green); }
+                    .share-button:hover {
+                        transform: translateY(-3px);
+                        background: var(--accent-color);
+                        color: #333;
+                        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                    }
 
-                    .copied {
-                        background-color: var(--accent-color) !important;
-                        color: #333 !important;
+                    .copy-success {
+                        position: fixed;
+                        bottom: 20px;
+                        left: 50%;
+                        transform: translateX(-50%) translateY(100px);
+                        background: var(--dark-green);
+                        color: var(--white);
+                        padding: 12px 24px;
+                        border-radius: 50px;
+                        font-size: 0.9rem;
+                        opacity: 0;
+                        transition: all 0.3s ease;
+                        z-index: 1000;
+                    }
+
+                    .copy-success.show {
+                        transform: translateX(-50%) translateY(0);
+                        opacity: 1;
                     }
 
                     .qr-code {
                         margin-top: 2rem;
-                        padding: 1rem;
+                        padding: 1.5rem;
                         display: flex;
                         flex-direction: column;
                         align-items: center;
-                        gap: 0.5rem;
-                        background: var(--white);
-                        border-radius: 8px;
-                        box-shadow: var(--shadow);
+                        gap: 1rem;
+                        background: #f8f9fa;
+                        border-radius: 10px;
+                        border: 2px dashed var(--dark-green);
                     }
 
                     .qr-code img {
-                        border-radius: 8px;
-                        border: 2px solid var(--dark-green);
+                        width: 150px;
+                        height: 150px;
+                        border-radius: 10px;
+                        padding: 10px;
+                        background: white;
+                        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
                     }
 
                     .qr-code p {
-                        color: #333;
+                        color: var(--dark-green);
                         font-size: 0.9rem;
                         font-family: var(--font-secondary);
+                        font-weight: 600;
+                        margin: 0;
                     }
 
                     @media (max-width: 768px) {
+                        .social-share {
+                            margin: 1.5rem 1rem;
+                            padding: 1.5rem;
+                        }
+
                         .share-buttons {
-                            flex-direction: column;
-                            align-items: stretch;
+                            gap: 0.8rem;
                         }
 
                         .share-button {
-                            justify-content: center;
+                            width: 45px;
+                            height: 45px;
                         }
 
-                        .social-share {
-                            margin: 1rem 0;
-                            padding: 1rem;
+                        .share-button i {
+                            font-size: 1.3rem;
+                        }
+
+                        .qr-code img {
+                            width: 120px;
+                            height: 120px;
                         }
                     }
                     </style>
