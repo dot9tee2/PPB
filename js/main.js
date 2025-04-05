@@ -71,7 +71,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if ('loading' in HTMLImageElement.prototype) {
         const images = document.querySelectorAll('img[loading="lazy"]');
         images.forEach(img => {
-            img.src = img.dataset.src;
+            // Only set src if it's not already set
+            if (img.dataset.src && !img.src) {
+                img.src = img.dataset.src;
+            }
+            
+            // Add error handling
+            img.onerror = function() {
+                console.error('Failed to load image:', img.src);
+                if (!img.src.includes('placeholder.jpg')) {
+                    img.src = 'media/placeholder.jpg';
+                }
+            };
         });
     } else {
         // Fallback for browsers that don't support lazy loading
