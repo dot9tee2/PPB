@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" 
+<xsl:stylesheet version="1.0" 
                 xmlns:html="http://www.w3.org/TR/REC-html40"
                 xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -69,7 +69,7 @@
                 <div class="wrapper">
                     <div class="header">
                         <h1>XML Sitemap</h1>
-                        <p>Pakistan Properties and Builders - Last updated: <xsl:value-of select="format-date(current-date(), '[MNn] [D], [Y]')"/></p>
+                        <p>Pakistan Properties and Builders</p>
                     </div>
                     <table>
                         <tr>
