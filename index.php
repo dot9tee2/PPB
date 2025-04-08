@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://unpkg.com" />
+    
     <title>Pakistan Properties and Builders - Premium Real Estate in Lahore, Islamabad & Sialkot</title>
     <meta name="description" content="Premier real estate agency offering luxury homes, commercial properties, and investment opportunities in Lahore, Islamabad, and Sialkot. Expert consultation and property management services." />
     <meta name="keywords" content="real estate Pakistan, property for sale Lahore, Islamabad real estate, Sialkot property market, luxury homes DHA, commercial property Pakistan, real estate investment, Pakistan Properties and Builders" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for Pakistan Properties and Builders" href="/feed.xml" />
     
     
     <!-- Twitter Card tags -->

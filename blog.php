@@ -3,59 +3,47 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://unpkg.com" />
+    
     <meta name="description" content="Stay updated with the latest real estate trends and insights. Read our blog for expert advice on buying, selling, and investing in properties." />
     <meta name="keywords" content="real estate blog, property trends, Pakistan Properties, buying tips, selling advice, investment insights" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for Pakistan Properties and Builders Blog" href="/feed.xml" />
+    
     <!-- Open Graph tags -->
     <meta property="og:title" content="Real Estate Insights & News | Pakistan Properties and Builders Blog" />
     <meta property="og:description" content="Stay updated with the latest real estate trends and insights. Read our blog for expert advice on buying, selling, and investing in properties." />
     <meta property="og:image" content="https://www.pakistanpropertiesandbuilders.com/media/blog-cover.jpg" />
     <meta property="og:url" content="https://www.pakistanpropertiesandbuilders.com/blog" />
     <meta property="og:type" content="website" />
+    
     <!-- Twitter Card tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Real Estate Insights & News | Pakistan Properties and Builders Blog" />
     <meta name="twitter:description" content="Stay updated with the latest real estate trends and insights. Read our blog for expert advice on buying, selling, and investing in properties." />
     <meta name="twitter:image" content="https://www.pakistanpropertiesandbuilders.com/media/blog-cover.jpg" />
+    
     <title>Real Estate Insights & News | Pakistan Properties and Builders Blog</title>
     <link rel="canonical" href="https://www.pakistanpropertiesandbuilders.com/blog" />
     <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
     <link rel="sitemap" type="application/xml" href="https://www.pakistanpropertiesandbuilders.com/sitemap.xml" />
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/footer.css" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/blog.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" />
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Pakistan Properties and Builders",
-        "image": "https://www.pakistanpropertiesandbuilders.com/logo.png",
-        "url": "https://www.pakistanpropertiesandbuilders.com/",
-        "telephone": "+92-321-6817568",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Commercial Broadway, DHA Phase 8",
-            "addressLocality": "Lahore",
-            "postalCode": "54940",
-            "addressCountry": "PK"
-        },
-        "description": "Leading real estate and construction company in Lahore offering property deals, home construction, and consultation services.",
-        "openingHours": "Mo-Sa 09:00-18:00",
-        "priceRange": "$$"
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.pakistanpropertiesandbuilders.com/" },
-            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.pakistanpropertiesandbuilders.com/blog" }
-        ]
-    }
-    </script>
+    
+    <!-- Enhanced Blog Schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -71,9 +59,43 @@
             }
         },
         "url": "https://www.pakistanpropertiesandbuilders.com/blog",
-        "mainEntityOfPage": "https://www.pakistanpropertiesandbuilders.com/blog"
+        "mainEntityOfPage": "https://www.pakistanpropertiesandbuilders.com/blog",
+        "author": {
+            "@type": "Organization",
+            "name": "Pakistan Properties and Builders",
+            "url": "https://www.pakistanpropertiesandbuilders.com/"
+        }
     }
     </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.pakistanpropertiesandbuilders.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.pakistanpropertiesandbuilders.com/blog" }
+        ]
+    }
+    </script>
+    
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Pakistan Properties and Builders",
+        "url": "https://www.pakistanpropertiesandbuilders.com",
+        "logo": "https://www.pakistanpropertiesandbuilders.com/logo.png",
+        "sameAs": [
+            "https://www.facebook.com/pakistanpropertiesandbuilders",
+            "https://www.instagram.com/pakistanpropertiesandbuilders",
+            "https://www.youtube.com/channel/UCBoP630-6gkU"
+        ]
+    }
+    </script>
+    
     <!-- Google Tag Manager -->
     <script>
     (function(w, d, s, l, i) {
